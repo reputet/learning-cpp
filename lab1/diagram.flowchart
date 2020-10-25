@@ -1,0 +1,7 @@
+start=>start: Start
+end=>end: End
+input=>inputoutput: Enter x
+square=>operation: x = x^2
+output=>inputoutput: Print x
+
+start->input->square->output->end
