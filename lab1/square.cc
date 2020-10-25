@@ -8,6 +8,6 @@ int main() {
     std::cout << "Enter a number: ";
     std::cin >> number;
     squared = pow(number, 2);
-    std::cout << number << " squared is equal to " << squared;
+    std::cout << number << " squared is equal to " << squared << endl;
     return 0;
 }

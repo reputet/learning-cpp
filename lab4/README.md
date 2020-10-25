@@ -1,3 +1,3 @@
 # Here is the flowchart:
 
-![flowchart](./flowchart.png)
+![flowchart](./flowchart.svg)
