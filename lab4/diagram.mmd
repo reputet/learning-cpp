@@ -1,10 +1,10 @@
 graph TD
-    Start([Start]) --> x[x = 0]
+    Start([Начало]) --> x[x = 0]
     x --> while{x < 1000000}
-    while --> |Yes| left["left_sum = sum of first 3 digits<br>(including leading zeros)"]
-    left --> right["right_sum = sum of last 3 digits"]
+    while --> |True| left["left_sum = сумма первых трёх цифр<br>(включая нули)"]
+    left --> right["right_sum = сумма последних трёх цифр"]
     right --> compare{left_sum == right_sum}
-    compare --> |Yes| print[/Print x/] --> increment
-    compare --> |No| increment["x = x + 1"]
-    while --> |No| End([End])
+    compare --> |True| print[/Вывод x/] --> increment
+    compare --> |False| increment["x = x + 1"]
+    while --> |False| End([Конец])
     increment --> while
