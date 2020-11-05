@@ -1,7 +1,7 @@
 start=>start: Начало
 end=>end: Конец
-input=>inputoutput: Ввод x
-square=>operation: x = x^2
-output=>inputoutput: Вывод x
+input=>inputoutput: Ввод number
+square=>operation: number = number^2
+output=>inputoutput: Вывод number
 
 start->input->square->output->end
