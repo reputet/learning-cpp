@@ -13,15 +13,15 @@ int main() {
         // First three digits including leading zeros
         left_half = number / 1000;
         while (left_half != 0) {
-            left_sum = left_sum + left_half % 10;
-            left_half = left_half / 10;
+            left_sum += left_half % 10;
+            left_half /= 10;
         };
 
         // Last three digits including leading zeros
         right_half = number % 1000;
         while (right_half != 0) {
-            right_sum = right_sum + right_half % 10;
-            right_half = right_half / 10;
+            right_sum += right_half % 10;
+            right_half /= 10;
         };
 
         if (left_sum == right_sum) {
