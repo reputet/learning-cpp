@@ -21,8 +21,8 @@ string get_content(string message) {
         }
 		cout << "No such file. Try another name: ";
     }
-        strStream << inFile.rdbuf(); //read the file
-        content = strStream.str(); //str holds the content of the file
+        strStream << inFile.rdbuf();
+        content = strStream.str();
     return content;
 }
 
@@ -140,13 +140,24 @@ void write_to_file(string filename, string *sentences_all, int num) {
 }
 
 void change_sentence(string *sentences_all, string word, int *sentences_with_word) {
-    bool stop = false;
     int sentence_to_change;
     string word_to_append;
     string char_to_remove;
     string answer;
-    while (stop == false) {
-        sentence_to_change = get_int("Please, choose the sentence you want to change: ");
+    while (true) {
+        bool z = false;
+        while (z == false) {
+            sentence_to_change = get_int("Please, choose the sentence you want to change: ");
+            for (int i=0; i < sentences_with_word[0]; i++) {
+                if (sentence_to_change == sentences_with_word[i + 1] + 1) {
+                    z = true;
+                    break;
+                }
+            }
+            if (z == false) {
+                cout << "Wrong number" << endl;
+            }
+        }
         word_to_append = get_input("Enter a word you want to append: ");
         char_to_remove = get_input("Enter a character you want to remove: ");
         append_word(sentences_all, word, sentence_to_change, word_to_append);
@@ -181,8 +192,8 @@ int main(){
     cout << endl << "The word " << word << " is found in the following sentences:" << endl;
     print_sentences(sentences_all, number_of_sentences_with_word, word);
     change_sentence(sentences_all, word, number_of_sentences_with_word);
-    cout << endl << "Here is the line after changes:" << endl;
-    print_sentences(sentences_all, number_of_sentences_with_word, word);
+    // cout << endl << "Here are the lines with the specified word after changes:" << endl;
+    // print_sentences(sentences_all, number_of_sentences_with_word, word);
     file_out = get_input("Enter the output file name: ");
     write_to_file(file_out, sentences_all, number_of_sentences);
     return 0;
