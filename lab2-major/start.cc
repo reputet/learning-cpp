@@ -1,24 +1,29 @@
-#include <iostream>
-#include <fstream> 
-#include <sstream>
-using namespace std;
+#include "start.h"
 
-string get_content(string filename) {
+string get_input(string text) {
+    string input;
+    cout << text;
+    getline(cin, input);
+    return input;
+}
+
+string get_content(string message) {
     ifstream inFile;
-    string foo;
-    inFile.open(filename);
-   	if (!inFile) {
-		cout << "No such file";
-	}
-    else {
-        stringstream strStream;
-        strStream << inFile.rdbuf(); //read the file
-        string str = strStream.str(); //str holds the content of the file
-        foo = str;
-    
-        //cout << str << endl; //you can do anything with the string!!!
+    string content;
+    string filename;
+    stringstream strStream;
+    cout << message;
+    while (true) {
+        filename = get_input("");
+        inFile.open(filename);
+        if (inFile) {
+            break;
+        }
+		cout << "No such file. Try another name: ";
     }
-    return foo;
+        strStream << inFile.rdbuf(); //read the file
+        content = strStream.str(); //str holds the content of the file
+    return content;
 }
 
 int get_int (string message) {
@@ -39,51 +44,51 @@ int get_int (string message) {
     return number;
 }
 
-int get_number_of_sentences (string s) {
+int get_number_of_sentences (string content) {
     string delimeter = ".";
     int num = 0;
-    for (int i=0; i < s.length(); i++) {
+    for (int i=0; i < content.length(); i++) {
         for (int j=0; j < delimeter.length(); j++) {
-            if (s[i] == delimeter[j]) {
+            if (content[i] == delimeter[j]) {
                 num += 1;
                 break;
             }
         }
     }
+    if (num == 0) {
+        cout << "There are no sentences in the file!";
+        exit(1);
+    }
     return num;
 }
 
-string *split(string s, int number_of_sentences) {
+string *split(string content, int number_of_sentences) {
     string sentence;
-    string delimeter = ".";
-    int counter = 0;
-    int start = 0;
-    int end = s.find(delimeter);
-    string *sentences = new string[number_of_sentences];
+    string *sentences;
+    string delimeter;
+    int start, end, counter;
+
+    delimeter = ".";
+    counter = 0;
+    start = 0;
+    end = content.find(delimeter);
+    sentences = new string[number_of_sentences];
 
     while (end != -1) {
-        sentence = s.substr(start, end + 1 - start);
+        sentence = content.substr(start, end + 1 - start);
         sentences[counter] = sentence;
         start = end + 1;
-        end = s.find(delimeter, start);
+        end = content.find(delimeter, start);
         counter++;
     }
     return sentences;
 }
 
-string get_input(string text) {
-    string input;
-    cout << text;
-    getline(cin, input);
-    return input;
-}
-
-int *get_number_of_sentences_with_word(string *s, int n, string word) {
+int *get_number_of_sentences_with_word(string *sentences_all, int n, string word) {
     int *numbers = new int[n+1];
     int counter = 1;
     for (int i=0; i < n; i++) {
-        if (s[i].find(word) != string::npos) {
-            //cout << s[i];
+        if (sentences_all[i].find(word) != string::npos) {
             numbers[counter] = i;
             counter++;
             continue;
@@ -93,57 +98,73 @@ int *get_number_of_sentences_with_word(string *s, int n, string word) {
     return numbers;
 }
 
-void print_sentences(string *s, int *n, string word) {
+void print_sentences(string *sentences_all, int *sentences_with_word, string word) {
     int i = 0;
-    while (i < n[0]) {
-        cout << n[i + 1] + 1 << ": " << s[n[i + 1]] << endl;
+    while (i < sentences_with_word[0]) {
+        cout << sentences_with_word[i + 1] + 1 << ": " << sentences_all[sentences_with_word[i + 1]] << endl;
         i++;
     }
     cout << endl;
 }
 
-void append_word(string *s, string word, int sentence_number, string word_to_append) {
-    int position = s[sentence_number - 1].find(word);
-    s[sentence_number - 1].insert(position + word.length(), word_to_append);
+void append_word(string *sentences_all, string word, int sentence_number, string word_to_append) {
+    string &content = sentences_all[sentence_number - 1];
+    int start, end, counter;
+    start = 0;
+    end = content.find(word);
+
+    while (end != string::npos) {
+        start = end + 1;
+        content.insert(end + word.length(), word_to_append);
+        end = content.find(word, start);
+    }
 }
 
-void remove_char(string *s, string char_to_remove, int sentence_number) {
+void remove_char(string *sentences_all, string char_to_remove, int sentence_number) {
+    string &content = sentences_all[sentence_number - 1];
     int position;
-    while ((position = s[sentence_number - 1].find(char_to_remove)) != string::npos) {
-        s[sentence_number - 1].erase(position, 1);
+    while ((position = content.find(char_to_remove)) != string::npos) {
+        content.erase(position, 1);
     }
+}
+
+void write_to_file(string filename, string *sentences_all, int num) {
+    ofstream to_file(filename);
+    string content;
+    content = "";
+    for (int i=0; i < num; i++) {
+        content.append(sentences_all[i]);
+    }
+    to_file << content;
 }
 
 int main(){
     string content;
-    string filename = get_input("Enter the existing filename: ");
-    //content = get_content("input.txt");
-    content = get_content(filename);
-    cout << "The content of the file " << filename << " is:" << endl << endl << content << endl;
-    string word = get_input("Enter a word for search: ");
-    //string word = "Foo";
-    int number_of_sentences = get_number_of_sentences(content);
+    string file_out = "output2.txt";
+    string word;
     string *sentences_all;
+    string word_to_append;
+    string char_to_remove;
+    int change_sentence;
+    int number_of_sentences;
+    int *number_of_sentences_with_word;
+
+    content = get_content("Enter the existing filename: ");
+    cout << "The content of the file is:" << endl << endl << content << endl;
+    word = get_input("Enter a word for search: ");
+    number_of_sentences = get_number_of_sentences(content);
     sentences_all = split(content, number_of_sentences);
-    int *number_of_sentences_with_word = get_number_of_sentences_with_word(sentences_all, number_of_sentences, word);
+    number_of_sentences_with_word = get_number_of_sentences_with_word(sentences_all, number_of_sentences, word);
     cout << endl << "The word " << word << " is found in the following sentences:" << endl << endl;
     print_sentences(sentences_all, number_of_sentences_with_word, word);
-    int change_sentence = get_int("Please, choose the sentences you want to change: ");
-    string word_to_append = get_input("Enter a word you want to append: ");
-    string char_to_remove = get_input("Enter a character you want to remove: ");
-    //int change_sentence = 5;
-    
-    //string *foo;
-    //string bar[2] = {"123456789", "www"};
-    //foo = bar;
-    //cout << foo[0];
-    //cout << endl << "Before changes:" << endl;
-    //print_sentences(sentences_all, number_of_sentences_with_word, word);
+    change_sentence = get_int("Please, choose the sentences you want to change: ");
+    word_to_append = get_input("Enter a word you want to append: ");
+    char_to_remove = get_input("Enter a character you want to remove: ");
     append_word(sentences_all, word, change_sentence, word_to_append);
     remove_char(sentences_all, char_to_remove, change_sentence);
     cout << endl << "Here are the lines after changes:" << endl << endl;
-    // TODO: print the whole content and save it to an output file
     print_sentences(sentences_all, number_of_sentences_with_word, word);
-    //cout << foo[0];
+    file_out = get_input("Enter the output file name: ");
+    write_to_file(file_out, sentences_all, number_of_sentences);
     return 0;
 }
