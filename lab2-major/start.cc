@@ -1,5 +1,9 @@
 #include "start.h"
 
+void print_horizontal_line() {
+    cout << "-----------------------------------";
+    cout << endl;
+}
 string get_input(string text) {
     string input;
     cout << text;
@@ -14,7 +18,7 @@ string get_content(string message) {
     stringstream strStream;
     cout << message;
     while (true) {
-        filename = get_input("");
+        getline(cin, filename);
         inFile.open(filename);
         if (inFile) {
             break;
@@ -101,10 +105,12 @@ int *get_number_of_sentences_with_word(string *sentences_all, int n, string word
 void print_sentences(string *sentences_all, int *sentences_with_word, string word) {
     int i = 0;
     cout << endl;
+    print_horizontal_line();
     while (i < sentences_with_word[0]) {
         cout << sentences_with_word[i + 1] + 1 << ": " << sentences_all[sentences_with_word[i + 1]] << endl;
         i++;
     }
+    print_horizontal_line();
     cout << endl;
 }
 
@@ -125,7 +131,7 @@ void remove_char(string *sentences_all, string char_to_remove, int sentence_numb
     string &content = sentences_all[sentence_number - 1];
     int position;
     while ((position = content.find(char_to_remove)) != string::npos) {
-        content.erase(position, 1);
+        content.erase(position, char_to_remove.length());
     }
 }
 
@@ -155,7 +161,7 @@ void change_sentence(string *sentences_all, string word, int *sentences_with_wor
                 }
             }
             if (z == false) {
-                cout << "Wrong number" << endl;
+                cout << "Wrong sentence. Try another!" << endl;
             }
         }
         word_to_append = get_input("Enter a word you want to append: ");
@@ -184,16 +190,18 @@ int main(){
     int *number_of_sentences_with_word;
 
     content = get_content("Enter the existing filename: ");
-    cout << "The content of the file is:" << endl << endl << content << endl;
+    cout << "The content of the file is:" << endl << endl;
+    print_horizontal_line();
+    cout << content << endl;
+    print_horizontal_line();
+    cout << endl;
     word = get_input("Enter a word for search: ");
     number_of_sentences = get_number_of_sentences(content);
     sentences_all = split(content, number_of_sentences);
     number_of_sentences_with_word = get_number_of_sentences_with_word(sentences_all, number_of_sentences, word);
-    cout << endl << "The word " << word << " is found in the following sentences:" << endl;
+    cout << "The word " << word << " is found in the following sentences:" << endl;
     print_sentences(sentences_all, number_of_sentences_with_word, word);
     change_sentence(sentences_all, word, number_of_sentences_with_word);
-    // cout << endl << "Here are the lines with the specified word after changes:" << endl;
-    // print_sentences(sentences_all, number_of_sentences_with_word, word);
     file_out = get_input("Enter the output file name: ");
     write_to_file(file_out, sentences_all, number_of_sentences);
     return 0;

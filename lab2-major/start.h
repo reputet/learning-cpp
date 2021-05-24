@@ -4,6 +4,7 @@
 
 using namespace std;
 
+void print_horizontal_line();
 string get_input(string);
 string get_content(string);
 int get_int (string);
