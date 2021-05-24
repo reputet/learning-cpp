@@ -14,3 +14,4 @@ void print_sentences(string *, int *, string);
 void append_word(string *, string, int, string);
 void remove_char(string *, string, int);
 void write_to_file(string, string *, int);
+void change_sentence(string *, string, int *);

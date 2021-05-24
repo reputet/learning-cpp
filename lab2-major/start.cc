@@ -100,6 +100,7 @@ int *get_number_of_sentences_with_word(string *sentences_all, int n, string word
 
 void print_sentences(string *sentences_all, int *sentences_with_word, string word) {
     int i = 0;
+    cout << endl;
     while (i < sentences_with_word[0]) {
         cout << sentences_with_word[i + 1] + 1 << ": " << sentences_all[sentences_with_word[i + 1]] << endl;
         i++;
@@ -138,14 +139,36 @@ void write_to_file(string filename, string *sentences_all, int num) {
     to_file << content;
 }
 
-int main(){
-    string content;
-    string file_out = "output2.txt";
-    string word;
-    string *sentences_all;
+void change_sentence(string *sentences_all, string word, int *sentences_with_word) {
+    bool stop = false;
+    int sentence_to_change;
     string word_to_append;
     string char_to_remove;
-    int change_sentence;
+    string answer;
+    while (stop == false) {
+        sentence_to_change = get_int("Please, choose the sentence you want to change: ");
+        word_to_append = get_input("Enter a word you want to append: ");
+        char_to_remove = get_input("Enter a character you want to remove: ");
+        append_word(sentences_all, word, sentence_to_change, word_to_append);
+        remove_char(sentences_all, char_to_remove, sentence_to_change);
+        print_sentences(sentences_all, sentences_with_word, word);
+        answer = get_input("Would you like to change something else? [y/n] ");
+        while (answer != "n" and answer != "N" and answer != "y" and answer != "Y") {
+            answer = get_input("Wrong input. Please, type y or n: ");
+        }
+        if (answer == "y" or answer == "Y") {
+            continue;
+        } else {
+            break;
+        }
+    }
+}
+
+int main(){
+    string content;
+    string file_out;
+    string word;
+    string *sentences_all;
     int number_of_sentences;
     int *number_of_sentences_with_word;
 
@@ -155,14 +178,10 @@ int main(){
     number_of_sentences = get_number_of_sentences(content);
     sentences_all = split(content, number_of_sentences);
     number_of_sentences_with_word = get_number_of_sentences_with_word(sentences_all, number_of_sentences, word);
-    cout << endl << "The word " << word << " is found in the following sentences:" << endl << endl;
+    cout << endl << "The word " << word << " is found in the following sentences:" << endl;
     print_sentences(sentences_all, number_of_sentences_with_word, word);
-    change_sentence = get_int("Please, choose the sentences you want to change: ");
-    word_to_append = get_input("Enter a word you want to append: ");
-    char_to_remove = get_input("Enter a character you want to remove: ");
-    append_word(sentences_all, word, change_sentence, word_to_append);
-    remove_char(sentences_all, char_to_remove, change_sentence);
-    cout << endl << "Here are the lines after changes:" << endl << endl;
+    change_sentence(sentences_all, word, number_of_sentences_with_word);
+    cout << endl << "Here is the line after changes:" << endl;
     print_sentences(sentences_all, number_of_sentences_with_word, word);
     file_out = get_input("Enter the output file name: ");
     write_to_file(file_out, sentences_all, number_of_sentences);
