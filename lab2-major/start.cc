@@ -48,7 +48,7 @@ int get_int (string message) {
     return number;
 }
 
-int get_number_of_sentences (string content) {
+int get_sentences_number (string content) {
     string delimeter = ".";
     int num = 0;
     for (int i=0; i < content.length(); i++) {
@@ -66,7 +66,7 @@ int get_number_of_sentences (string content) {
     return num;
 }
 
-string *split(string content, int number_of_sentences) {
+string *split_sentences(string content, int number_of_sentences) {
     string sentence;
     string *sentences;
     string delimeter;
@@ -88,17 +88,19 @@ string *split(string content, int number_of_sentences) {
     return sentences;
 }
 
-int *get_number_of_sentences_with_word(string *sentences_all, int n, string word) {
-    int *numbers = new int[n+1];
+int *get_relevant_sentences_numbers(string *all_sentences, int sentences_number, string word) {
+    int array_length;
+    int *numbers = new int[sentences_number + 1];
     int counter = 1;
-    for (int i=0; i < n; i++) {
-        if (sentences_all[i].find(word) != string::npos) {
+    for (int i=0; i < sentences_number; i++) {
+        if (all_sentences[i].find(word) != string::npos) {
             numbers[counter] = i;
             counter++;
             continue;
         }
     }
-    numbers[0] = counter - 1;
+    array_length = counter - 1;
+    numbers[0] = array_length;
     return numbers;
 }
 
@@ -185,9 +187,9 @@ int main(){
     string content;
     string file_out;
     string word;
-    string *sentences_all;
-    int number_of_sentences;
-    int *number_of_sentences_with_word;
+    string *sentences_list;
+    int sentences_number;
+    int *sentences_number_with_word;
 
     content = get_content("Enter the existing filename: ");
     cout << "The content of the file is:" << endl << endl;
@@ -195,14 +197,19 @@ int main(){
     cout << content << endl;
     print_horizontal_line();
     cout << endl;
-    word = get_input("Enter a word for search: ");
-    number_of_sentences = get_number_of_sentences(content);
-    sentences_all = split(content, number_of_sentences);
-    number_of_sentences_with_word = get_number_of_sentences_with_word(sentences_all, number_of_sentences, word);
+    sentences_number = get_sentences_number(content);
+    sentences_list = split_sentences(content, sentences_number);
+    do {
+        word = get_input("Enter a word for search: ");
+        sentences_number_with_word = get_relevant_sentences_numbers(sentences_list, sentences_number, word);
+        if (!sentences_number_with_word[0]) {
+            cout << "The word" << " '" << word << "' " << "was not found. Try again." << endl;
+        }
+    } while (!sentences_number_with_word[0]);
     cout << "The word " << word << " is found in the following sentences:" << endl;
-    print_sentences(sentences_all, number_of_sentences_with_word, word);
-    change_sentence(sentences_all, word, number_of_sentences_with_word);
+    print_sentences(sentences_list, sentences_number_with_word, word);
+    change_sentence(sentences_list, word, sentences_number_with_word);
     file_out = get_input("Enter the output file name: ");
-    write_to_file(file_out, sentences_all, number_of_sentences);
+    write_to_file(file_out, sentences_list, sentences_number);
     return 0;
 }
