@@ -88,8 +88,10 @@ int get_sentences_number(string content) {
         }
     }
     if (num == 0) {
-        cout << "There are no sentences in the file!";
-        exit(1);
+        cout << "There are no sentences in the file!" << endl
+             << "Try another file." << endl;
+             pause();
+             return -1;
     }
     return num;
 }
@@ -316,6 +318,9 @@ int main() {
                 cout << content;
                 print_horizontal_line();
                 number_of_sentences = get_sentences_number(content);
+                if (number_of_sentences == -1) {
+                    continue;
+                }
                 sentences_list = split_sentences(content, number_of_sentences);
                 pause();
                 break;
