@@ -1,42 +1,190 @@
-# Example
+# Task
+The program allows the user to:
+
+1. Specify a file by name;
+2. Find all the sentences by with an specified occurence;
+3. Add a word2 after the occurence in the found sentences;
+4. Remove punctuation characters (one or many) in the found sentences;
+5. Save the modified content to another file.
+
+# Example of the program execution
 
 ```
-$ ./start
-Enter the existing filename: input.txt
-The content of the file input.txt is:
+$ ./start.exe
+-----------------------------------
+Input file: <not set>
+Output file: <not set>
 
-Bar1. Bar2. Foo1.
-Bar3. Foo2 bla, bla, hey, how are you doing. aslkdfjdsf. sldkjf.
-sadlkfj. another Foo3. aosdkf
+Command action:
+   1.   Set input file name
+   2.   Add a word after another word
+   3.   Remove a punctuation char (one or all)
+   4.   Set output file name
+   5.   Save and exit
+   0.   Exit without saving
+-----------------------------------
+Press a number: 1
+Please, enter the filename: input.txt
 
-Good morning, please and thank you
-Not very hard to say,
-But little deeds
-Like little words
-Can make or mar your day.
-Say these few words often,
-With a pleasant smile.
-This can lighten many a load and
-Shorten many a mile.  And Foo4. qwe.
-qweWW.
+The content of the file is:
+-----------------------------------
+Sentence 1 odd1, odd2, odd3: all.
+Sentence 2 even1, even2, even3; all.
+Sentence 3 odd4, odd5, odd6: all.
+Sentence 4 even4, even5, even6; all.
+Sentence 5 odd7, odd8, odd9: all.
+Sentence 4 even7, even8, even9; all.
+-----------------------------------
 
-Enter a word for search: Foo
+Press any key to continue . . .
 
-The word Foo is found in the following sentences:
+-----------------------------------
+Input file: input.txt
+Output file: <not set>
 
-3:  Foo1.
-5:  Foo2 bla, bla, hey, how are you doing.
-9:  another Foo3.
-13:   And Foo4.
+Command action:
+   1.   Set input file name
+   2.   Add a word after another word
+   3.   Remove a punctuation char (one or all)
+   4.   Set output file name
+   5.   Save and exit
+   0.   Exit without saving
+-----------------------------------
+Press a number: 2
+Enter a word to find the sentences: odd
 
-Please, choose the sentences you want to change: 5
-Enter a word you want to append: Bar
-Enter a character you want to remove: ,
+The word 'odd' is found in the following sentences:
+-----------------------------------
+Sentence 1 odd1, odd2, odd3: all.
+Sentence 3 odd4, odd5, odd6: all.
+Sentence 5 odd7, odd8, odd9: all.
+-----------------------------------
 
-Here are the lines after changes:
+Enter a word you want to append:  FOOBAR
 
-3:  Foo1.
-5:  FooBar2 bla bla hey how are you doing.
-9:  another Foo3.
-13:   And Foo4.
+The modified sentences are:
+-----------------------------------
+Sentence 1 odd FOOBAR1, odd FOOBAR2, odd FOOBAR3: all.
+Sentence 3 odd FOOBAR4, odd FOOBAR5, odd FOOBAR6: all.
+Sentence 5 odd FOOBAR7, odd FOOBAR8, odd FOOBAR9: all.
+-----------------------------------
+
+Press any key to continue . . .
+
+-----------------------------------
+Input file: input.txt
+Output file: <not set>
+
+Command action:
+   1.   Set input file name
+   2.   Add a word after another word
+   3.   Remove a punctuation char (one or all)
+   4.   Set output file name
+   5.   Save and exit
+   0.   Exit without saving
+-----------------------------------
+Press a number: 3
+Enter a word to find the sentences: even
+
+The word 'even' is found in the following sentences:
+-----------------------------------
+
+Sentence 2 even1, even2, even3; all.
+Sentence 4 even4, even5, even6; all.
+Sentence 4 even7, even8, even9; all.
+-----------------------------------
+
+Press any key to continue . . .
+
+What character do you want to remove?
+   (,)   to remove the commas
+   (:)   to remove the collons
+   (;)   to remove the semicolons
+   (-)   to remove the hyphens
+   (a)   to remove all the punctuation characters
+-----------------------------------
+Choose a character: ;
+
+The modified sentences are:
+-----------------------------------
+
+Sentence 2 even1, even2, even3 all.
+Sentence 4 even4, even5, even6 all.
+Sentence 4 even7, even8, even9 all.
+-----------------------------------
+
+Press any key to continue . . .
+
+-----------------------------------
+Input file: input.txt
+Output file: <not set>
+
+Command action:
+   1.   Set input file name
+   2.   Add a word after another word
+   3.   Remove a punctuation char (one or all)
+   4.   Set output file name
+   5.   Save and exit
+   0.   Exit without saving
+-----------------------------------
+Press a number: 3
+Enter a word to find the sentences: odd
+
+The word 'odd' is found in the following sentences:
+-----------------------------------
+Sentence 1 odd FOOBAR1, odd FOOBAR2, odd FOOBAR3: all.
+Sentence 3 odd FOOBAR4, odd FOOBAR5, odd FOOBAR6: all.
+Sentence 5 odd FOOBAR7, odd FOOBAR8, odd FOOBAR9: all.
+-----------------------------------
+
+Press any key to continue . . .
+
+What character do you want to remove?
+   (,)   to remove the commas
+   (:)   to remove the collons
+   (;)   to remove the semicolons
+   (-)   to remove the hyphens
+   (a)   to remove all the punctuation characters
+-----------------------------------
+Choose a character: a
+
+The modified sentences are:
+-----------------------------------
+Sentence 1 odd FOOBAR1 odd FOOBAR2 odd FOOBAR3 all.
+Sentence 3 odd FOOBAR4 odd FOOBAR5 odd FOOBAR6 all.
+Sentence 5 odd FOOBAR7 odd FOOBAR8 odd FOOBAR9 all.
+-----------------------------------
+
+Press any key to continue . . .
+
+-----------------------------------
+Input file: input.txt
+Output file: <not set>
+
+Command action:
+   1.   Set input file name
+   2.   Add a word after another word
+   3.   Remove a punctuation char (one or all)
+   4.   Set output file name
+   5.   Save and exit
+   0.   Exit without saving
+-----------------------------------
+Press a number: 4
+Enter the output file name: output.txt
+
+-----------------------------------
+Input file: input.txt
+Output file: output.txt
+
+Command action:
+   1.   Set input file name
+   2.   Add a word after another word
+   3.   Remove a punctuation char (one or all)
+   4.   Set output file name
+   5.   Save and exit
+   0.   Exit without saving
+-----------------------------------
+Press a number: 5
+Saved
+Buy!
 ```

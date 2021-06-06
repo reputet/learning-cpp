@@ -378,6 +378,7 @@ int main() {
             case '4':
                 cout << endl;
                 output_file = get_input("Enter the output file name: ");
+                cout << endl;
                 break;
             case '5':
                 cout << endl;
