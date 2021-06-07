@@ -77,7 +77,7 @@ string get_content(string filename) {
 }
 
 int get_sentences_number(string content) {
-    string sentences_delimeter = ".";
+    string sentences_delimeter = ".!?";
     int num = 0;
     for (int i=0; i < content.length(); i++) {
         for (int j=0; j < sentences_delimeter.length(); j++) {
@@ -102,17 +102,17 @@ string *split_sentences(string content, int all_sentences_number) {
     string delimeter;
     int start, end, counter;
 
-    delimeter = ".";
+    delimeter = ".?!";
     counter = 0;
     start = 0;
-    end = content.find(delimeter);
+    end = content.find_first_of(delimeter);
     sentences_array = new string[all_sentences_number];
 
     while (end != -1) {
         sentence = content.substr(start, end + 1 - start);
         sentences_array[counter] = sentence;
         start = end + 1;
-        end = content.find(delimeter, start);
+        end = content.find_first_of(delimeter, start);
         counter++;
     }
     return sentences_array;

@@ -1,6 +1,6 @@
 Sentence 1 odd1, odd2, odd3: all.
-Sentence 2 even1, even2, even3; all.
-Sentence 3 odd4, odd5, odd6: all.
+Sentence 2 even1, even2, even3; all!
+Sentence 3 odd4, odd5, odd6: all?
 Sentence 4 even4, even5, even6; all.
-Sentence 5 odd7, odd8, odd9: all.
-Sentence 4 even7, even8, even9; all.
+Sentence 5 odd7, odd8, odd9: all?
+Sentence 6 even7, even8, even9; all!
