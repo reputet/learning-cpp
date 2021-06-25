@@ -11,10 +11,7 @@ void print_horizontal_line() {
     cout << endl;
 }
 
-void print_menu(string input_file, string output_file, bool print_nothing) {
-    if (print_nothing) {
-        return;
-    }
+void print_menu(string input_file, string output_file) {
     if (input_file.empty()) {
         input_file = "<not set>";
     }
@@ -238,29 +235,8 @@ void remove_in_sentences(string *all_sentences, string word,
         choise = getche();
         switch (choise) {
             case ',':
-                cout << endl;
-                for (int i=0; i < sentences_number; i++) {
-                    sentence_to_change = sentences_with_word[i + 1] + 1;
-                    remove_char(all_sentences, choise, sentence_to_change);
-                }
-                exit = true;
-                break;
             case ':':
-                cout << endl;
-                for (int i=0; i < sentences_number; i++) {
-                    sentence_to_change = sentences_with_word[i + 1] + 1;
-                    remove_char(all_sentences, choise, sentence_to_change);
-                }
-                exit = true;
-                break;
             case ';':
-                cout << endl;
-                for (int i=0; i < sentences_number; i++) {
-                    sentence_to_change = sentences_with_word[i + 1] + 1;
-                    remove_char(all_sentences, choise, sentence_to_change);
-                }
-                exit = true;
-                break;
             case '-':
                 cout << endl;
                 for (int i=0; i < sentences_number; i++) {
@@ -305,7 +281,9 @@ int main() {
     exit = false;
     suppress_menu = false;
     while (!exit) {
-        print_menu(input_file, output_file, suppress_menu);
+        if (!suppress_menu) {
+            print_menu(input_file, output_file);
+        }
         suppress_menu = false;
         choise = getche();
         switch (choise) {
