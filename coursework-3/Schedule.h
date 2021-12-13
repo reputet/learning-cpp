@@ -1,0 +1,1 @@
+enum Schedule {PART_TIME, FULL_TIME, REMOTE};
