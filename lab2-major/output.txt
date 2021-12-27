@@ -1,0 +1,6 @@
+Sentence 1 oddABC1, oddABC2, oddABC3: all.
+Sentence 2 even1, even2, even3; all.
+Sentence 3 oddABC4, oddABC5, oddABC6: all.
+Sentence 4 even4, even5, even6; all.
+Sentence 5 oddABC7 oddABC8 oddABC9 all.
+Sentence 4 even7 even8 even9 all.
