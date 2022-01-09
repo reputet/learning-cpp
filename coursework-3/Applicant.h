@@ -1,10 +1,10 @@
-#include <set>
+#include "./ArrayList.h"
 using namespace std;
 
 struct Applicant {
     string fullName;
     Scope jobType;
-    set<Job> possibleJobs;
+    ArrayList<Job> possibleJobs;
     int experience;
     int desiredSalary;
 };
