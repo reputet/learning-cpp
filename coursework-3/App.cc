@@ -7,8 +7,8 @@ int main() {
     a.possibleJobs = ArrayList<Job>();
     a.possibleJobs.add(JAVA_D3);
     a.possibleJobs.add(JAVA_D4);
-    a.possibleJobs.add(PROJECT_MANAGER);
     a.possibleJobs.add(JAVA_D4);
+    a.possibleJobs.add(PROJECT_MANAGER);
     a.experience = 5;
     a.desiredSalary = 300000;
  
@@ -29,10 +29,15 @@ int main() {
     
     p.salary = 290000;
     cout << "second match is " << a.isMatch(p) << "\n";
-    // a.possibleJobs.clear();
-    //cout << a.possibleJobs.get(0);
-    //cout << a.possibleJobs.get(1);
+    
+    a.possibleJobs.add(PROJECT_MANAGER, 1);
+
     cout << "index of pm is " << a.possibleJobs.getIndex(PROJECT_MANAGER) << "\n";
+
+    a.possibleJobs.remove(1);
+    cout << "index of pm is " << a.possibleJobs.getIndex(PROJECT_MANAGER) << "\n";
+    cout << "size is " << a.possibleJobs.getSize() << "\n";
+
 
 }
 

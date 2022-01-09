@@ -18,31 +18,31 @@ public:
         size++;
     };
 
-    // void add(T &arg, unsigned int index) {
-    //     if (index >= 0 && index <= size) {
-    //         if (index == size) {
-    //             add(arg);
-    //         }
-    //         else {
-    //             array[index] = &arg;
-    //         }
-    //     }
-    //     else {
-    //         throw "IndexOutOfBoundException";
-    //     }
-    // };
+    void add(T arg, unsigned int index) {
+        if (index >= 0 && index <= size) {
+            if (index == size) {
+                add(arg);
+            }
+            else {
+                array[index] = arg;
+            }
+        }
+        else {
+            throw "IndexOutOfBoundException";
+        }
+    };
 
-    // void remove(unsigned int index) { //remove element from specific position
-    //     if (index >= 0 && index < size) {
-    //         for (int i = index; i < size - 1; i++) {
-    //             array[i] = array[i + 1];
-    //         }
-    //         size--;
-    //     }
-    //     else {
-    //         throw "IndexOutOfBoundException";
-    //     }
-    // };
+    void remove(unsigned int index) {
+        if (index >= 0 && index < size) {
+            for (int i = index; i < size - 1; i++) {
+                array[i] = array[i + 1];
+            }
+            size--;
+        }
+        else {
+            throw "IndexOutOfBoundException";
+        }
+    };
 
     void clear() {
         for (int i = 0; i < size; i++) {
@@ -60,18 +60,18 @@ public:
         }
     };
 
-    unsigned int getIndex(T arg) { 
+    int getIndex(T arg) { 
         unsigned int index = 0;
         while (arg != array[index] && index < size) {
             index++;
         }
         if (index == size) {
-            throw "ArgumentNotFoundException";
+            return -1;
         }
         return index;
     };
 
-    unsigned int getSize() { //return size of list
+    unsigned int getSize() { 
         return size;
     };
 
