@@ -7,15 +7,15 @@ struct Applicant {
     ArrayList<Job> possibleJobs;
     int experience;
     int desiredSalary;
+    bool isMatch(Position p) {
+        for(auto &job : possibleJobs) {
+            if (job == p.job) {
+                if (p.jobType == jobType &&
+                p.salary >= desiredSalary &&
+                p.desiredExperience <= experience) return true;
+            }
+        };
+    return false;
+    }
 };
 
-bool isMatch(Applicant a, Position p) {
-    for(auto & job : a.possibleJobs) {
-        if (job == p.job) {
-            if (a.jobType == p.jobType &&
-            p.salary >= a.desiredSalary &&
-            p.desiredExperience <= a.experience) return true;
-        }
-    };
-    return false;
-}

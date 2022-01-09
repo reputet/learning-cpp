@@ -25,10 +25,10 @@ int main() {
     p.salary = 320000;
     p.desiredExperience = 4;
 
-    cout << "is match: " << isMatch(a, p) << "\n";
+    cout << "is match: " << a.isMatch(p) << "\n";
     
     p.salary = 290000;
-    cout << "second match is " << isMatch(a, p) << "\n";
+    cout << "second match is " << a.isMatch(p) << "\n";
     // a.possibleJobs.clear();
     //cout << a.possibleJobs.get(0);
     //cout << a.possibleJobs.get(1);
