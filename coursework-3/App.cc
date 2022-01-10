@@ -62,6 +62,7 @@ int main() {
 
     bool exit = false;
     string filename;
+    string output_file;
     int choise, i;
     Applicant applicant;
     Company company;
@@ -93,6 +94,10 @@ int main() {
                         case '2':
                             filename = get_filename("Please, enter the filename: ");
                             applicants = readApplicants(filename);
+                            break;
+                        case '3':
+                            output_file = get_input("Enter the output file name: ");
+                            write_to_file(output_file, applicants);
                             break;
                         case '4':
                             applicant = createApplicant();
