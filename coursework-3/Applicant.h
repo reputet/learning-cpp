@@ -1,6 +1,7 @@
 #pragma once
 #include "./ArrayList.h"
 #include "./Utils.h"
+
 struct Applicant {
     string fullName;
     Scope jobType;
