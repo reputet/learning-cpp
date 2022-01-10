@@ -7,7 +7,12 @@ struct Applicant {
     ArrayList<Job> possibleJobs;
     int experience;
     int desiredSalary;
-
+    friend bool operator!= (const Applicant &c1, const Applicant &c2) {
+        return (c1.fullName != c2.fullName || 
+        c1.desiredSalary != c2.desiredSalary ||
+        c1.experience != c2.experience ||
+        c1.jobType != c2.jobType);
+    }
     bool isMatch(Position p) {
         for(auto &job : possibleJobs) {
             if (job == p.job) {
@@ -18,6 +23,7 @@ struct Applicant {
         };
     return false;
     }
+    
 };
 
 void printAllAplicants(ArrayList<Applicant> applicants) {

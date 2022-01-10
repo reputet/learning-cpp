@@ -6,7 +6,13 @@ struct Position {
     Job job;
     Scope jobType;
     int salary;
-    int desiredExperience;   
+    int desiredExperience; 
+    friend bool operator!= (const Position &c1, const Position &c2) {
+        return (c1.company.name != c2.company.name || 
+        c1.salary != c2.salary ||
+        c1.desiredExperience != c2.desiredExperience ||
+        c1.jobType != c2.jobType);
+    }  
 };
 
 void printAllPositions(ArrayList<Position> positions) {

@@ -39,6 +39,7 @@ void printPositionsMenu() {
     cout << "   3.   Save to file" << endl;
     cout << "   4.   Add position" << endl;
     cout << "   5.   Remove position" << endl;
+    cout << "   6.   See successfully closed positions" << endl;
     cout << "   0.   Main menu" << endl;
     printHorizontalLine();
     cout << "Press a number: ";
