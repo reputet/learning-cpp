@@ -23,10 +23,10 @@ struct Applicant {
 void printAllAplicants(ArrayList<Applicant> applicants) {
     int i = 1;
     for(auto &applicant : applicants) {
-        cout << i << ". " << applicant.fullName << "\t" << ToString(applicant.jobType) << "\n";
+        cout << i << ". " << applicant.fullName << "\t" << toString(applicant.jobType) << "\n";
         cout << "\tPossible jobs:\n";
         for(auto &job : applicant.possibleJobs) {
-            cout << "\t\t" << ToString(job) << "\n";
+            cout << "\t\t" << toString(job) << "\n";
         }
         cout << "\tExperience: " << applicant.experience << "\n";
         cout << "\tDesired salary: " << applicant.desiredSalary << "\n";

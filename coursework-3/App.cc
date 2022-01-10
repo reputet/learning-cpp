@@ -8,7 +8,8 @@ int main() {
     ArrayList<Company> companies = ArrayList<Company>();
 
     bool exit = false;
-    int choise;
+    int choise, i;
+    Applicant applicant;
     while (!exit) {
         printCommonMenu();
         choise = getche();
@@ -34,9 +35,12 @@ int main() {
                             }
                             break;
                         case '4':
-                            Applicant a = createApplicant();
-                            applicants.add(a);
-                            break;                                                    
+                            applicant = createApplicant();
+                            applicants.add(applicant);
+                            break;    
+                        case '5':
+                            i = stoi(getInput("Please enter the number of the candidate to remove:\n"));
+                            applicants.remove(i - 1);
                     }           
                 }
             case '2':    

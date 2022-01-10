@@ -1,7 +1,7 @@
 #pragma once
 enum Scope {IT, MEDIA, MEDICINE, LAW, EDUCATION, GOVERNMENT};
 
-inline const char* ToString(Scope v)
+inline const char* toString(Scope v)
 {
     switch (v)
     {
@@ -18,6 +18,6 @@ inline const char* ToString(Scope v)
 void printAllScopes() {
     for (int i = IT; i <= GOVERNMENT; i++ ) {
         Scope scope = static_cast<Scope>(i);
-        cout << i << ". " << ToString(scope) << "\n";
+        cout << i << ". " << toString(scope) << "\n";
    }
 }
