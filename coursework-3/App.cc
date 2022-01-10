@@ -33,7 +33,10 @@ int main() {
                                 cout << "\nNo candidates yet\n\n";
                             }
                             break;
-                                                    
+                        case '4':
+                            Applicant a = createApplicant();
+                            applicants.add(a);
+                            break;                                                    
                     }           
                 }
             case '2':    

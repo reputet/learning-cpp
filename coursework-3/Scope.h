@@ -14,3 +14,10 @@ inline const char* ToString(Scope v)
         default: return "[Unknown job scope]";
     }
 }
+
+void printAllScopes() {
+    for (int i = IT; i <= GOVERNMENT; i++ ) {
+        Scope scope = static_cast<Scope>(i);
+        cout << i << ". " << ToString(scope) << "\n";
+   }
+}

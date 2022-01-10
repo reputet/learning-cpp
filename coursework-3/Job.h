@@ -1,8 +1,7 @@
 #pragma once
 enum Job {JAVA_D2, JAVA_D3, JAVA_D4, PROJECT_MANAGER, LAWYER, MATH_TEACHER, THERAPYST};
 
-inline const char* ToString(Job v)
-{
+inline const char* ToString(Job v) {
     switch (v)
     {
         case JAVA_D2: return "Middle Java Developer";
@@ -14,4 +13,11 @@ inline const char* ToString(Job v)
         case THERAPYST: return "Therapyst";
         default: return "[Unknown job name]";
     }
+}
+
+void printAllJobNames() {
+    for (int i = JAVA_D2; i <= THERAPYST; i++ ) {
+        Job job = static_cast<Job>(i);
+        cout << i << ". " << ToString(job) << "\n";
+   }
 }
