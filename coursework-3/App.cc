@@ -76,8 +76,6 @@ int main() {
         }
     };
     
-    
-
     Applicant a;
     a.fullName = "Alex R. Jones";
     a.jobType = IT;

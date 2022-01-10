@@ -42,9 +42,10 @@ Applicant createApplicant() {
     int scope = stoi(getInput("Please select scope:\n"));
     a.jobType = static_cast<Scope>(scope);
     printAllJobNames();
-    string jobNumbers = getInput("Please select all possible jobs (f.e. 135):\n");
-    for(int i = 0; i < jobNumbers.length(); i++) {
-        a.possibleJobs.add(static_cast<Job>(jobNumbers[i] - '0'));
+    string jobNumbers = getInput("Please select all possible jobs divided by space (f.e. 1 3 5):\n");
+    ArrayList<string> splittedNumbers = splitString(jobNumbers, " ");
+    for(auto &number : splittedNumbers) {
+        a.possibleJobs.add(static_cast<Job>(stoi(number)));
     }
     a.desiredSalary = stoi(getInput("Please enter the desired salary:\n"));
     a.experience = stoi(getInput("Please enter experience in years:\n"));
