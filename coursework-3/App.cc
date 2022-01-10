@@ -31,6 +31,7 @@ int main() {
                         case '1':
                             if (!applicants.isEmpty()) {
                                 printAllAplicants(applicants);
+                                getche();
                             } else {
                                 cout << "\nNo candidates yet\n\n";
                             }
@@ -56,6 +57,7 @@ int main() {
                         case '1':
                             if (!companies.isEmpty()) {
                                 printAllCompanies(companies);
+                                getche();
                             } else {
                                 cout << "\nNo companies yet\n\n";
                             }
@@ -81,11 +83,17 @@ int main() {
                         case '1':
                             if (!unprocessedJobs.isEmpty()) {
                                 printAllPositions(unprocessedJobs);
+                                getche();
                             } else {
                                 cout << "\nNo positions yet\n\n";
                             }
                             break;
-                        
+                        case '4':
+                            unprocessedJobs.add(createPosition(companies));
+                            break;    
+                        case '5':
+                            i = stoi(getInput("Please enter the number of the position to remove:\n"));
+                            unprocessedJobs.remove(i - 1);
                     }           
                 }
             case '4':

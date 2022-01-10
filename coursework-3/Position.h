@@ -17,7 +17,6 @@ void printAllPositions(ArrayList<Position> positions) {
         cout << "\tDesired experience: " << position.desiredExperience << "\n";
         i++;
     }
-    getche();
 }
 
 Position createPosition(ArrayList<Company> companies) {
@@ -27,6 +26,7 @@ Position createPosition(ArrayList<Company> companies) {
     printAllJobNames();
     p.job = static_cast<Job>(stoi(getInput("Please enter job:\n")) - 1);
     printAllCompanies(companies);
+    p.company = companies.get(stoi(getInput("Please choose the company:\n")) - 1);
     p.salary = stoi(getInput("Please enter the salary:\n"));
     p.desiredExperience = stoi(getInput("Please enter desired experience in years:\n"));
     return p;

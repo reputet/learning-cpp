@@ -32,7 +32,6 @@ void printAllAplicants(ArrayList<Applicant> applicants) {
         cout << "\tDesired salary: " << applicant.desiredSalary << "\n";
         i++;
     }
-    getche();
 }
 
 Applicant createApplicant() {
