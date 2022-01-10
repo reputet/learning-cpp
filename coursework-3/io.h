@@ -25,3 +25,25 @@ ArrayList<Applicant> readApplicants(string filename) {
 
     return applicantsList;
 }
+
+void write_to_file(string filename, ArrayList<Applicant> applicants) {
+    ofstream to_file(filename);
+    string content;
+    int i = 1;
+    for(auto &applicant : applicants) {
+        content.append(applicant.fullName + ",");
+        content.append(to_string(applicant.jobType) + ',');
+        string job_content;
+        for(auto &job : applicant.possibleJobs) {
+            job_content.append(to_string(job) + ' ');
+        }
+        content.append(job_content.substr(0, job_content.length() - 1));
+        content.append(",");
+        content.append(to_string(applicant.experience) + ",");
+        content.append(to_string(applicant.desiredSalary));
+        content.append("\n");
+        i++;
+    }
+    content.append("\n");
+    to_file << content;
+}
