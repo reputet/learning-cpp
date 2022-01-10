@@ -1,5 +1,5 @@
+#pragma once
 #include "./ArrayList.h"
-using namespace std;
 
 struct Applicant {
     string fullName;
@@ -7,6 +7,7 @@ struct Applicant {
     ArrayList<Job> possibleJobs;
     int experience;
     int desiredSalary;
+    
     bool isMatch(Position p) {
         for(auto &job : possibleJobs) {
             if (job == p.job) {

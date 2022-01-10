@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 
+#include "./Menu.h"
 #include "./ArrayList.h"
 #include "./Schedule.h"
 #include "./Scope.h"

@@ -1,6 +1,62 @@
 #include "./App.h"
 
 int main() {
+    bool exit = false;
+    int choise;
+    while (!exit) {
+        printCommonMenu();
+        choise = getche();
+        cout << "\n";
+        switch (choise) {            
+            case '0':
+                exit = true;
+                break;
+            case '1':    
+                while(!exit) {
+                    printApplicantsMenu();
+                    choise = getche();
+                    cout << "\n";
+                    switch (choise) { 
+                        case '0':
+                            exit = true;
+                            break;
+                    }           
+                }
+            case '2':    
+                while(!exit) {
+                    printCompaniesMenu();
+                    choise = getche();
+                    cout << "\n";
+                    switch (choise) { 
+                        case '0':
+                            exit = true;
+                            break;
+                    }           
+                }
+            case '3':    
+                while(!exit) {
+                    printPositionsMenu();
+                    choise = getche();
+                    cout << "\n";
+                    switch (choise) { 
+                        case '0':
+                            exit = true;
+                            break;
+                    }           
+                }
+            case '4':
+                while(!exit) {
+                    cout << "\nTO BE IMPLEMENTED\n";                            
+                    getche();
+                    exit = true;
+                }
+            default:
+                exit = false;
+        }
+    };
+    
+    
+
     Applicant a;
     a.fullName = "Alex R. Jones";
     a.jobType = IT;

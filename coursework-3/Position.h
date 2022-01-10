@@ -1,4 +1,5 @@
 #pragma once
+
 struct Position {
     Company company;
     Job job;
