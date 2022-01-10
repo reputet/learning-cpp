@@ -45,13 +45,13 @@ Applicant createApplicant() {
     Applicant a;
     a.fullName = getInput("Please enter the full name:\n");
     printAllScopes();
-    int scope = stoi(getInput("Please select scope:\n"));
+    int scope = stoi(getInput("Please select scope:\n")) - 1;
     a.jobType = static_cast<Scope>(scope);
     printAllJobNames();
     string jobNumbers = getInput("Please select all possible jobs divided by space (f.e. 1 3 5):\n");
     ArrayList<string> splittedNumbers = splitString(jobNumbers, " ");
     for(auto &number : splittedNumbers) {
-        a.possibleJobs.add(static_cast<Job>(stoi(number)));
+        a.possibleJobs.add(static_cast<Job>(stoi(number) - 1));
     }
     a.desiredSalary = stoi(getInput("Please enter the desired salary:\n"));
     a.experience = stoi(getInput("Please enter experience in years:\n"));

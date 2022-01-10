@@ -167,7 +167,7 @@ int main() {
                 while(!exit) {         
                     for(auto &p : unprocessedJobs) {
                         for(auto &a : applicants) {
-                            if (a.isMatch(p)) {
+                            if (a.isMatch(p) && hired.getIndex(a) == -1 && processedJobs.getIndex(p) == -1) {
                                 cout << "Candidate " << a.fullName << " matches position " << toString(p.job) <<
                                 " from " << p.company.name << "\n";
                                 processedJobs.add(p);
