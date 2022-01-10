@@ -1,6 +1,12 @@
 #include "./App.h"
 
 int main() {
+
+    ArrayList<Job> unprocessedJobs = ArrayList<Job>();
+    ArrayList<Job> processedJobs = ArrayList<Job>();
+    ArrayList<Applicant> applicants = ArrayList<Applicant>();
+    ArrayList<Company> companies = ArrayList<Company>();
+
     bool exit = false;
     int choise;
     while (!exit) {
@@ -16,10 +22,18 @@ int main() {
                     printApplicantsMenu();
                     choise = getche();
                     cout << "\n";
-                    switch (choise) { 
+                    switch (choise) {                         
                         case '0':
                             exit = true;
                             break;
+                        case '1':
+                            if (!applicants.isEmpty()) {
+                                printAllAplicants(applicants);
+                            } else {
+                                cout << "\nNo candidates yet\n\n";
+                            }
+                            break;
+                                                    
                     }           
                 }
             case '2':    
@@ -63,7 +77,6 @@ int main() {
     a.possibleJobs = ArrayList<Job>();
     a.possibleJobs.add(JAVA_D3);
     a.possibleJobs.add(JAVA_D4);
-    a.possibleJobs.add(JAVA_D4);
     a.possibleJobs.add(PROJECT_MANAGER);
     a.experience = 5;
     a.desiredSalary = 300000;
@@ -81,19 +94,12 @@ int main() {
     p.salary = 320000;
     p.desiredExperience = 4;
 
-    cout << "is match: " << a.isMatch(p) << "\n";
-    
+    cout << "is match: " << a.isMatch(p) << "\n";    
     p.salary = 290000;
     cout << "second match is " << a.isMatch(p) << "\n";
-    
-    a.possibleJobs.add(PROJECT_MANAGER, 1);
 
-    cout << "index of pm is " << a.possibleJobs.getIndex(PROJECT_MANAGER) << "\n";
-
-    a.possibleJobs.remove(1);
-    cout << "index of pm is " << a.possibleJobs.getIndex(PROJECT_MANAGER) << "\n";
-    cout << "size is " << a.possibleJobs.getSize() << "\n";
-
+    applicants.add(a);
+    printAllAplicants(applicants);
 
 }
 
