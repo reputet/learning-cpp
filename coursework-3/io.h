@@ -1,16 +1,4 @@
-string getContent(string filename) {
-    ifstream inFile;
-    string message;
-    string content;
-    stringstream strStream;
-    inFile.open(filename);
-    strStream << inFile.rdbuf();
-    content = strStream.str();
-    return content;
-}
-
 ArrayList<Applicant> readApplicants(string filename) {
-    string content;
     string line;
     string jobNumbers;
     int scope;
@@ -19,7 +7,6 @@ ArrayList<Applicant> readApplicants(string filename) {
     ArrayList<string> splittedNumbers;
 
     ifstream infile(filename);
-    content = getContent(filename);
     Applicant applicant;
     while (getline(infile, line)) {
         split = splitString(line, ",");
