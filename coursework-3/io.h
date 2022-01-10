@@ -1,8 +1,3 @@
-#pragma once
-#include <sstream>
-#include <string>
-#include "./App.h"
-
 string getContent(string filename) {
     ifstream inFile;
     string message;

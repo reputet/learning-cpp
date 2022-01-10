@@ -1,10 +1,3 @@
-#include <conio.h>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
-using namespace std;
-
 string get_input(string text) {
     string input;
     cout << text;
