@@ -6,7 +6,6 @@
 
 #include "./Menu.h"
 #include "./ArrayList.h"
-#include "./Schedule.h"
 #include "./Scope.h"
 #include "./Job.h"
 #include "./Company.h"

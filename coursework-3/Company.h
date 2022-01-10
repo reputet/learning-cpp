@@ -17,7 +17,6 @@ void printAllCompanies(ArrayList<Company> companies) {
         cout << "\tPhone: " << company.phone << "\n";
         i++;
     }
-    getche();
 }
 
 Company createCompany() {
