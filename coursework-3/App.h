@@ -11,4 +11,6 @@
 #include "./Company.h"
 #include "./Position.h"
 #include "./Applicant.h"
+#include "./io.h"
+#include "./getFileName.h"
 using namespace std;

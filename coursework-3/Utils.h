@@ -15,7 +15,7 @@ ArrayList<string> splitString(string s, string delimeter) {
     int start = 0;
     int end = end = s.find_first_of(delimeter);
     while (end != -1) {
-        result.add(s.substr(start, end + 1 - start));
+        result.add(s.substr(start, end - start));
         start = end + 1;
         end = s.find_first_of(delimeter, start);
     }

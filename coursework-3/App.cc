@@ -8,6 +8,7 @@ int main() {
     ArrayList<Company> companies = ArrayList<Company>();
 
     bool exit = false;
+    string filename;
     int choise, i;
     Applicant applicant;
     Company company;
@@ -35,6 +36,10 @@ int main() {
                             } else {
                                 cout << "\nNo candidates yet\n\n";
                             }
+                            break;
+                        case '2':
+                            filename = get_filename("Please, enter the filename: ");
+                            applicants = readApplicants(filename);
                             break;
                         case '4':
                             applicant = createApplicant();
