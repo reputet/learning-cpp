@@ -52,3 +52,8 @@ Applicant createApplicant() {
     return a;
 }
 
+ArrayList<Applicant> readFromFile(string fileName) {
+    ArrayList<Applicant> result = ArrayList<Applicant>();
+
+    return result;
+}

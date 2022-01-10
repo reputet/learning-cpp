@@ -18,6 +18,6 @@ inline const char* toString(Scope v)
 void printAllScopes() {
     for (int i = IT; i <= GOVERNMENT; i++ ) {
         Scope scope = static_cast<Scope>(i);
-        cout << i << ". " << toString(scope) << "\n";
+        cout << i + 1 << ". " << toString(scope) << "\n";
    }
 }

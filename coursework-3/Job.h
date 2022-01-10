@@ -18,6 +18,6 @@ inline const char* toString(Job v) {
 void printAllJobNames() {
     for (int i = JAVA_D2; i <= THERAPYST; i++ ) {
         Job job = static_cast<Job>(i);
-        cout << i << ". " << toString(job) << "\n";
+        cout << i + 1 << ". " << toString(job) << "\n";
    }
 }

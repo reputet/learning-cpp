@@ -2,14 +2,15 @@
 
 int main() {
 
-    ArrayList<Job> unprocessedJobs = ArrayList<Job>();
-    ArrayList<Job> processedJobs = ArrayList<Job>();
+    ArrayList<Position> unprocessedJobs = ArrayList<Position>();
+    ArrayList<Position> processedJobs = ArrayList<Position>();
     ArrayList<Applicant> applicants = ArrayList<Applicant>();
     ArrayList<Company> companies = ArrayList<Company>();
 
     bool exit = false;
     int choise, i;
     Applicant applicant;
+    Company company;
     while (!exit) {
         printCommonMenu();
         choise = getche();
@@ -52,6 +53,20 @@ int main() {
                         case '0':
                             exit = true;
                             break;
+                        case '1':
+                            if (!companies.isEmpty()) {
+                                printAllCompanies(companies);
+                            } else {
+                                cout << "\nNo companies yet\n\n";
+                            }
+                            break;
+                        case '4':
+                            company = createCompany();
+                            companies.add(company);
+                            break;    
+                        case '5':
+                            i = stoi(getInput("Please enter the number of the company to remove:\n"));
+                            companies.remove(i - 1);
                     }           
                 }
             case '3':    
@@ -63,6 +78,14 @@ int main() {
                         case '0':
                             exit = true;
                             break;
+                        case '1':
+                            if (!unprocessedJobs.isEmpty()) {
+                                printAllPositions(unprocessedJobs);
+                            } else {
+                                cout << "\nNo positions yet\n\n";
+                            }
+                            break;
+                        
                     }           
                 }
             case '4':
