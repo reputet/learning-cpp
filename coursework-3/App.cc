@@ -10,6 +10,7 @@ int main() {
 
     bool exit = false;
     string filename;
+    string output_file;
     int choise, i;
     Applicant applicant;
     Company company;
@@ -43,7 +44,8 @@ int main() {
                             applicants = readApplicants(filename);
                             break;
                         case '3':
-                            cout << "To be implemented\n";
+                            output_file = get_input("Enter the output file name: ");
+                            write_to_file(output_file, applicants);
                             break;
                         case '4':
                             applicant = createApplicant();
