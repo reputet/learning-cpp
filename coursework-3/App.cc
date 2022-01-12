@@ -8,58 +8,6 @@ int main() {
     ArrayList<Applicant> hired = ArrayList<Applicant>();
     ArrayList<Company> companies = ArrayList<Company>();
 
-
-    Applicant a;
-    a.fullName = "Alex R. Jones";
-    a.jobType = IT;
-    a.possibleJobs = ArrayList<Job>();
-    a.possibleJobs.add(JAVA_D3);
-    a.possibleJobs.add(JAVA_D4);
-    a.possibleJobs.add(PROJECT_MANAGER);
-    a.experience = 5;
-    a.desiredSalary = 300000;
-    applicants.add(a);
-    
-    Applicant a2;
-    a2.fullName = "Michael S. Smith";
-    a2.jobType = IT;
-    a2.possibleJobs = ArrayList<Job>();
-    a2.possibleJobs.add(JAVA_D4);
-    a2.possibleJobs.add(PROJECT_MANAGER);
-    a2.experience = 6;
-    a2.desiredSalary = 350000;
-    applicants.add(a2);    
-
-    Company c;
-    c.name = "Epam Systems";
-    c.jobType = IT;
-    c.address = "Spb, Zastavskaya Ulitsa, 22/2";
-    c.phone = "8 (812) 611-10-94";
-    companies.add(c);
-
-    Company c2;
-    c2.name = "Luxoft Tech.";
-    c2.jobType = IT;
-    c2.address = "Spb, Polyustrovskiy pr., 140";
-    c2.phone = "8 (812) 123-45-67";
-    companies.add(c2);
-
-    Position p;
-    p.company = c;
-    p.job = PROJECT_MANAGER;
-    p.jobType = p.company.jobType;
-    p.salary = 320000;
-    p.desiredExperience = 4;
-    unprocessedJobs.add(p);
-
-    Position p2;
-    p2.company = c;
-    p2.job = JAVA_D4;
-    p2.jobType = p2.company.jobType;
-    p2.salary = 340000;
-    p2.desiredExperience = 3;
-    unprocessedJobs.add(p2);
-
     bool exit = false;
     string filename;
     int choise, i;
@@ -91,8 +39,11 @@ int main() {
                             }
                             break;
                         case '2':
-                            filename = get_filename("Please, enter the filename: ");
+                            filename = getFilename("Please, enter the filename: ");
                             applicants = readApplicants(filename);
+                            break;
+                        case '3':
+                            cout << "To be implemented\n";
                             break;
                         case '4':
                             applicant = createApplicant();
@@ -191,4 +142,10 @@ int main() {
                 exit = false;
         }
     };
+
+        LinkedList<Applicant> list = LinkedList<Applicant>();
+        for (auto &a : applicants) {
+            list.add(a);
+        }
+        list.printAllElements();
 }

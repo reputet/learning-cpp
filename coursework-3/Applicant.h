@@ -1,19 +1,36 @@
 #pragma once
 #include "./ArrayList.h"
 #include "./Utils.h"
-
+// Задание №9. Обеспечить эффективное хранение данных и быстрый поиск информации в бюро по трудоустройству. 
+// Должна быть представлена информация о: 
+//  работодателях (название, сфера деятельности, адрес, телефон и т.п.);
+//  предлагаемых ими вакансиях (наименование должности, график работы, оклад, 
+// требования по образованию и квалификации, предложения и заявки работодателей и т.д.);
+//  соискателях (фамилия, имя, отчество, возможные должности, сфера деятельности, 
+// стаж работы, ожидаемый оклад и т.д.).
+// Соискатель должен получать список подходящих по его желаниям 
+// предложений от работодателей, работодатель должен получать список всех 
+// подходящих под его требования работников. Должны добавляться новые соискатели, 
+// работодатели, вакансии. В случае совпадения интересов работодателя и соискателя 
+// вакансия должна быть занята и перемещена в список удовлетворённых заявок
 struct Applicant {
     string fullName;
     Scope jobType;
     ArrayList<Job> possibleJobs;
     int experience;
     int desiredSalary;
+
     friend bool operator!= (const Applicant &c1, const Applicant &c2) {
         return (c1.fullName != c2.fullName || 
         c1.desiredSalary != c2.desiredSalary ||
         c1.experience != c2.experience ||
         c1.jobType != c2.jobType);
     }
+
+    friend ostream& operator<< (ostream& os, const Applicant &c) {
+        return os << c.fullName;
+    }
+    
     bool isMatch(Position p) {
         for(auto &job : possibleJobs) {
             if (job == p.job) {
@@ -58,8 +75,31 @@ Applicant createApplicant() {
     return a;
 }
 
-ArrayList<Applicant> readFromFile(string fileName) {
-    ArrayList<Applicant> result = ArrayList<Applicant>();
+ArrayList<Applicant> readApplicants(string filename) {
+    string line;
+    string jobNumbers;
+    int scope;
+    ArrayList<Applicant> applicantsList;
+    ArrayList<string> split;
+    ArrayList<string> splittedNumbers;
 
-    return result;
+    ifstream infile(filename);
+    
+    while (getline(infile, line)) {
+        Applicant applicant = Applicant();
+        split = splitString(line, ",");
+        applicant.fullName = split.get(0);
+        scope = stoi(split.get(1));
+        applicant.jobType = static_cast<Scope>(scope);
+        jobNumbers = split.get(2);
+        splittedNumbers = splitString(jobNumbers, " ");
+        for(auto &number : splittedNumbers) {
+            applicant.possibleJobs.add(static_cast<Job>(stoi(number)));
+        }
+        applicant.experience = stoi(split.get(3));
+        applicant.desiredSalary = stoi(split.get(4));
+        applicantsList.add(applicant);
+    }
+
+    return applicantsList;
 }

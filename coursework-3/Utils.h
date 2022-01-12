@@ -23,15 +23,8 @@ ArrayList<string> splitString(string s, string delimeter) {
     return result;
 }
 
-string get_input(string text) {
-    string input;
-    cout << text;
-    getline(cin, input);
-    return input;
-}
 
-
-bool is_file_exists(string name) {
+bool isFileExists(string name) {
     ifstream inFile;
     inFile.open(name);
     if (inFile) {
@@ -40,12 +33,12 @@ bool is_file_exists(string name) {
     return false;
 }
 
-string get_filename(string message) {
+string getFilename(string message) {
     string name;
     bool file_found = false;
     while (!file_found) {
-        name = get_input(message);
-        if (is_file_exists(name)) {
+        name = getInput(message);
+        if (isFileExists(name)) {
             file_found = true;
         } else {
             cout << "No such file. Try another name: " << endl;
