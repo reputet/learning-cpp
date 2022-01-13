@@ -36,6 +36,10 @@ public:
         tail = 0;
     }
 
+    bool isEmpty() {
+        return size == 0;
+    }
+
     Node<T>* add (T value) {
         Node<T>* newElement = new Node<T>(value, tail);
         if (size == 0) {
@@ -121,24 +125,33 @@ public:
         throw "No such element";        
     }
 
+    void clear() {
+        Node<T>* current = head;
+        Node<T>* next = 0;
+        while (current != 0) {            
+            next = current->next;
+            free(current);
+            current = next;
+        };        
+        head = 0;        
+        tail = head;
+        size = 0;
+    }
+
     unsigned int getSize() {
         return size;
     }
     
-    T *begin() {
-        return &head->_data;
-    }
-    T  *end() {
-        return &tail->_data;
-    }
-
     void printAllElements() {
         cout << "[";
         Node<T>* i = head;
-        while (i != 0) {
-            cout << i->_data << ", ";
-            i = i->next;
+        if (size != 0) {
+            while (i != 0) {
+                cout << i->_data << ", ";
+                i = i->next;
+            }
+            cout << "\b\b";
         }
-        cout << "\b\b]";
+        cout << "]";
     }
 };

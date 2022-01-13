@@ -44,8 +44,8 @@ int main() {
                             applicants = readApplicants(filename);
                             break;
                         case '3':
-                            output_file = get_input("Enter the output file name: ");
-                            write_to_file(output_file, applicants);
+                            output_file = getInput("Enter the output file name: ");
+                            saveApplicants(output_file, applicants);
                             break;
                         case '4':
                             applicant = createApplicant();
@@ -149,5 +149,7 @@ int main() {
         for (auto &a : applicants) {
             list.add(a);
         }
+        list.printAllElements();
+        list.clear();
         list.printAllElements();
 }
