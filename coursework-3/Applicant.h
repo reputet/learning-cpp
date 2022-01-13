@@ -27,6 +27,10 @@ struct Applicant {
         c1.jobType != c2.jobType);
     }
 
+    friend bool operator< (const Applicant &c1, const Applicant &c2) {
+        return (c1.fullName < c2.fullName);
+    }
+
     friend ostream& operator<< (ostream& os, const Applicant &c) {
         return os << c.fullName;
     }

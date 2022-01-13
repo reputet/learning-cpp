@@ -144,11 +144,13 @@ int main() {
                 exit = false;
         }
     };
-
+        applicants = readApplicants("applicants.csv");
         LinkedList<Applicant> list = LinkedList<Applicant>();
         for (auto &a : applicants) {
             list.add(a);
         }
+        list.printAllElements();
+        list.sort();
         list.printAllElements();
         list.clear();
         list.printAllElements();

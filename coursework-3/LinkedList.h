@@ -154,4 +154,22 @@ public:
         }
         cout << "]";
     }
+    void swap (Node<T>* first, Node<T>* second) {
+        T temp = first->_data;
+        first->_data = second->_data;
+        second->_data = temp;
+    }
+
+    void sort() {
+        for (int i = 0; i < size; i++) {
+            cout << "i = " << i << endl;
+            for(Node<T>* n = head->next; n != tail; n = n->next) {
+                cout << "prev: " << n->prev->_data << " current: " << n->_data << " next " << n->next->_data << endl;
+                if (n->_data < n->prev->_data) {
+                    swap(n->prev, n);
+                    cout << "after swap prev: " << n->prev->_data << " current: " << n->_data << " next " << n->next->_data << endl;
+                };
+            }
+        }
+    }
 };
