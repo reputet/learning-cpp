@@ -67,11 +67,15 @@ int main() {
                             break;
                         case '1':
                             if (!companies.isEmpty()) {
-                                printAllCompanies(companies);
+                                printAllCompanies(&companies);
                                 getche();
                             } else {
                                 cout << "\nNo companies yet\n\n";
                             }
+                            break;
+                        case '2':
+                            filename = getFilename("Please, enter the filename: ");
+                            companies = readCompanies(filename, &companies);
                             break;
                         case '4':
                             company = createCompany();
@@ -99,8 +103,12 @@ int main() {
                                 cout << "\nNo positions yet\n\n";
                             }
                             break;
+                        case '2':
+                            filename = getFilename("Please, enter the filename: ");
+                            unprocessedJobs = readPositions(filename, &companies);
+                            break;
                         case '4':
-                            unprocessedJobs.add(createPosition(companies));
+                            unprocessedJobs.add(createPosition(&companies));
                             break;    
                         case '5':
                             i = stoi(getInput("Please enter the number of the position to remove:\n"));
@@ -122,7 +130,7 @@ int main() {
                         for(auto &a : applicants) {
                             if (a.isMatch(p) && hired.getIndex(a) == -1 && processedJobs.getIndex(p) == -1) {
                                 cout << "Candidate " << a.fullName << " matches position " << toString(p.job) <<
-                                " from " << p.company.name << "\n";
+                                " from " << p.company->name << "\n";
                                 processedJobs.add(p);
                                 hired.add(a);                    
                             }

@@ -162,12 +162,13 @@ public:
 
     void sort() {
         for (int i = 0; i < size; i++) {
-            Node<T>* n = head;
-            while (n != tail) {        
-                n = n->next;
+            Node<T>* n = head->next;
+            while (n != 0) {        
                 if (n->_data < n->prev->_data) {
                     swap(n->prev, n);            
+                    
                 };
+                n = n->next;
             }
         }
     }

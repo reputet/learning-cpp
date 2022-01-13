@@ -1,18 +1,7 @@
 #pragma once
 #include "./ArrayList.h"
 #include "./Utils.h"
-// Задание №9. Обеспечить эффективное хранение данных и быстрый поиск информации в бюро по трудоустройству. 
-// Должна быть представлена информация о: 
-//  работодателях (название, сфера деятельности, адрес, телефон и т.п.);
-//  предлагаемых ими вакансиях (наименование должности, график работы, оклад, 
-// требования по образованию и квалификации, предложения и заявки работодателей и т.д.);
-//  соискателях (фамилия, имя, отчество, возможные должности, сфера деятельности, 
-// стаж работы, ожидаемый оклад и т.д.).
-// Соискатель должен получать список подходящих по его желаниям 
-// предложений от работодателей, работодатель должен получать список всех 
-// подходящих под его требования работников. Должны добавляться новые соискатели, 
-// работодатели, вакансии. В случае совпадения интересов работодателя и соискателя 
-// вакансия должна быть занята и перемещена в список удовлетворённых заявок
+
 struct Applicant {
     string fullName;
     Scope jobType;
@@ -28,11 +17,13 @@ struct Applicant {
     }
 
     friend bool operator< (const Applicant &c1, const Applicant &c2) {
-        return (c1.fullName < c2.fullName);
+        return (c1.desiredSalary < c2.desiredSalary) ||
+        (c1.desiredSalary == c2.desiredSalary && c1.fullName < c2.fullName);
     }
 
     friend ostream& operator<< (ostream& os, const Applicant &c) {
-        return os << c.fullName;
+        return os << "Applicant: " << c.fullName << ", experience: " << c.experience << ", desired salary: " 
+            <<  c.desiredSalary;
     }
 
     bool isMatch(Position p) {
@@ -51,13 +42,12 @@ struct Applicant {
 void printAllAplicants(ArrayList<Applicant> applicants) {
     int i = 1;
     for(auto &applicant : applicants) {
-        cout << i << ". " << applicant.fullName << "\t" << toString(applicant.jobType) << "\n";
-        cout << "\tPossible jobs:\n";
+        cout << i << ". " << applicant << endl;
+        cout << "\tPossible jobs: ";
         for(auto &job : applicant.possibleJobs) {
-            cout << "\t\t" << toString(job) << "\n";
+            cout << toString(job) << ", ";
         }
-        cout << "\tExperience: " << applicant.experience << "\n";
-        cout << "\tDesired salary: " << applicant.desiredSalary << "\n";
+        cout << "\b\b \n";
         i++;
     }
 }

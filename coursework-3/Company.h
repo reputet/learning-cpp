@@ -9,9 +9,9 @@ struct Company {
     string phone;
 };
 
-void printAllCompanies(ArrayList<Company> companies) {
+void printAllCompanies(ArrayList<Company> *companies) {
     int i = 1;
-    for(auto &company : companies) {
+    for(auto company : *companies) {
         cout << i << ". " << company.name << "\t" << toString(company.jobType) << "\n";
         cout << "\tAddress: " << company.address << "\n";
         cout << "\tPhone: " << company.phone << "\n";
@@ -27,4 +27,41 @@ Company createCompany() {
     result.address = getInput("Please enter the company address:\n");
     result.phone = getInput("Please enter the phone:\n");
     return result;
+}
+
+Company* createCompany(string name, Scope scope) {
+    Company* result = new Company();
+    result->name = name;    
+    result->jobType = scope;
+    result->address = "Not present yet";
+    result->phone = "Not present yet";
+    return result;
+}
+
+ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies) {
+    string line;    
+    ArrayList<string> split;
+
+    ifstream infile(filename);
+
+    while (getline(infile, line)) {
+        Company com = *(new Company());
+        split = splitString(line, ",");
+        com.name = split.get(0);
+        com.jobType = static_cast<Scope>(stoi(split.get(1)));
+        com.address = split.get(2);
+        com.phone = split.get(3);
+        bool companyExists = false;
+        for(auto &c : *companies) {
+            if (c.name == com.name) {
+                c = com;           
+                companyExists = true; 
+            }
+        }
+        if (!companyExists) {
+            cout << "Creating company " << com.name << endl;
+            companies->add(com);
+        }        
+    }
+    return *companies;
 }
