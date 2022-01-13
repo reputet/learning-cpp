@@ -62,10 +62,10 @@ public:
 
     int getIndex(T arg) { 
         unsigned int index = 0;
-        while (arg != array[index] && index < size) {
+        while (index < size && arg != array[index]) {
             index++;
         }
-        if (index == size) {
+        if (index == size) {        
             return -1;
         }
         return index;

@@ -27,6 +27,7 @@ void printApplicantsMenu() {
     cout << "   4.   Add candidate" << endl;
     cout << "   5.   Remove candidate" << endl;
     cout << "   6.   Find all positions for the candidate" << endl;
+    cout << "   7.   See successfully employed candidates" << endl;
     cout << "   0.   Main menu" << endl;
     printHorizontalLine();
     cout << "Press a number: ";

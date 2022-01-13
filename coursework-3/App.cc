@@ -8,9 +8,9 @@ int main() {
     ArrayList<Applicant> hired = ArrayList<Applicant>();
     ArrayList<Company> companies = ArrayList<Company>();
     
-    applicants = readApplicants("applicants.csv");
-    companies = readCompanies("companies.csv", &companies);
-    unprocessedJobs = readPositions("positions.csv", &companies);
+    // applicants = readApplicants("applicants.csv");
+    // companies = readCompanies("companies.csv", &companies);
+    // unprocessedJobs = readPositions("positions.csv", &companies);
 
     bool exit = false;
     string filename;
@@ -61,10 +61,18 @@ int main() {
                             break;
                         case '6':
                             printAllAplicants(applicants);
-                            int i = stoi(getInput("Enter the candidate number: ")) - 1;
+                            i = stoi(getInput("Enter the candidate number: ")) - 1;
                             applicant = applicants.get(i);
                             cout << "\nNext positions are found for " << applicant.fullName << ":" << endl;
                             findPositions(&applicant, &unprocessedJobs).printAllElements();
+                            break;
+                        case '7':
+                            if (!hired.isEmpty()) {
+                                printAllAplicants(hired);
+                                getche();
+                            } else {
+                                cout << "\nNo closed positions yet\n\n";
+                            }                            
                     }           
                 }
             case '2':    
@@ -144,8 +152,8 @@ int main() {
                 }
             case '4':   
                 while(!exit) {         
-                    for(auto &p : unprocessedJobs) {
-                        for(auto &a : applicants) {
+                    for(auto &p : unprocessedJobs) {                        
+                        for(auto &a : applicants) {                            
                             if (a.isMatch(p) && hired.getIndex(a) == -1 && processedJobs.getIndex(p) == -1) {
                                 cout << "Candidate " << a.fullName << " matches position " << toString(p.job) <<
                                 " from " << p.company->name << "\n";
