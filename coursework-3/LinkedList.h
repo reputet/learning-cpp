@@ -10,7 +10,7 @@ template <typename T> struct Node {
 
     Node(T data, Node<T>* tail) {
         _data = data;
-        prev = tail;
+        prev = tail;                
     }
 
     bool hasNext() {
@@ -47,6 +47,7 @@ public:
         } else {
             tail->next = newElement;
         }
+        newElement->next = 0;
         tail = newElement;
         size++;
         return tail;
@@ -143,16 +144,17 @@ public:
     }
     
     void printAllElements() {
-        cout << "[";
+        int k = 1;
         Node<T>* i = head;
         if (size != 0) {
             while (i != 0) {
-                cout << i->_data << ", ";
+                cout << k << ". " << i->_data << endl;
                 i = i->next;
+                k++;
             }
             cout << "\b\b";
         }
-        cout << "]";
+        cout << endl;
     }
     void swap (Node<T>* first, Node<T>* second) {
         T temp = first->_data;

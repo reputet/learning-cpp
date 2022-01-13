@@ -7,6 +7,11 @@ int main() {
     ArrayList<Applicant> applicants = ArrayList<Applicant>();
     ArrayList<Applicant> hired = ArrayList<Applicant>();
     ArrayList<Company> companies = ArrayList<Company>();
+    
+    applicants = readApplicants("applicants.csv");
+    companies = readCompanies("companies.csv", &companies);
+    unprocessedJobs = readPositions("positions.csv", &companies);
+
 
     bool exit = false;
     string filename;
@@ -54,6 +59,13 @@ int main() {
                         case '5':
                             i = stoi(getInput("Please enter the number of the candidate to remove:\n"));
                             applicants.remove(i - 1);
+                            break;
+                        case '6':
+                            printAllAplicants(applicants);
+                            int i = stoi(getInput("Enter the candidate number")) - 1;
+                            applicant = applicants.get(i);
+                            cout << "\nNext positions are found for " << applicant.fullName << ":" << endl;
+                            findPositions(&applicant, &unprocessedJobs).printAllElements();
                     }           
                 }
             case '2':    
@@ -152,7 +164,7 @@ int main() {
                 exit = false;
         }
     };
-        applicants = readApplicants("applicants.csv");
+        
         LinkedList<Applicant> list = LinkedList<Applicant>();
         for (auto &a : applicants) {
             list.add(a);

@@ -23,7 +23,7 @@ struct Position {
     friend ostream& operator<< (ostream& os, const Position &c) {
         return os << "Scope: " << toString(c.company->jobType) << ", position: " << toString(c.job) 
             << ", company: " << c.company->name << ", desired experience: " << c.desiredExperience 
-            << ", salary: " << c.salary << endl;
+            << ", salary: " << c.salary;
     }
 };
 
@@ -31,9 +31,6 @@ void printAllPositions(ArrayList<Position> positions) {
     int i = 1;
     for(auto &position : positions) {
         cout << i << ". " << position;
-        // cout << i << ". " << position.company->name << "\t" << toString(position.job) << "\n";
-        // cout << "\tJob type: " << toString(position.company->jobType) << " Salary: " << position.salary << "\n";
-        // cout << "\tDesired experience: " << position.desiredExperience << "\n";
         i++;
     }
 }

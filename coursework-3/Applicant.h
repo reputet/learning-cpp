@@ -1,5 +1,6 @@
 #pragma once
 #include "./ArrayList.h"
+#include "./LinkedList.h"
 #include "./Utils.h"
 
 struct Applicant {
@@ -118,4 +119,16 @@ void saveApplicants(string filename, ArrayList<Applicant> applicants) {
     }
     content.append("\n");
     to_file << content;
+}
+
+LinkedList<Position> findPositions(Applicant* applicant, ArrayList<Position>* allJobs) {
+    LinkedList<Position> result = LinkedList<Position>();
+    for(auto &a : *allJobs) {        
+        if (applicant->isMatch(a)) {
+            result.add(a);                    
+        }
+    }
+
+    result.sort();
+    return result;
 }
