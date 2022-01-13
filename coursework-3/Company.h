@@ -7,14 +7,17 @@ struct Company {
     Scope jobType;
     string address;
     string phone;
+
+    friend ostream& operator<< (ostream& os, const Company &c) {
+        return os << c.name << ", scope: " << toString(c.jobType) << ", address: " << c.address 
+            << ", phone: " << c.phone;
+    }
 };
 
 void printAllCompanies(ArrayList<Company> *companies) {
     int i = 1;
     for(auto company : *companies) {
-        cout << i << ". " << company.name << "\t" << toString(company.jobType) << "\n";
-        cout << "\tAddress: " << company.address << "\n";
-        cout << "\tPhone: " << company.phone << "\n";
+        cout << i << ". " <<  company << "\n";
         i++;
     }
 }
@@ -65,3 +68,5 @@ ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies)
     }
     return *companies;
 }
+
+

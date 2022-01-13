@@ -12,7 +12,6 @@ int main() {
     companies = readCompanies("companies.csv", &companies);
     unprocessedJobs = readPositions("positions.csv", &companies);
 
-
     bool exit = false;
     string filename;
     string output_file;
@@ -62,7 +61,7 @@ int main() {
                             break;
                         case '6':
                             printAllAplicants(applicants);
-                            int i = stoi(getInput("Enter the candidate number")) - 1;
+                            int i = stoi(getInput("Enter the candidate number: ")) - 1;
                             applicant = applicants.get(i);
                             cout << "\nNext positions are found for " << applicant.fullName << ":" << endl;
                             findPositions(&applicant, &unprocessedJobs).printAllElements();
@@ -96,6 +95,13 @@ int main() {
                         case '5':
                             i = stoi(getInput("Please enter the number of the company to remove:\n"));
                             companies.remove(i - 1);
+                            break;
+                        case '6':
+                            printAllCompanies(&companies);
+                            int i = stoi(getInput("Enter the company number: ")) - 1;
+                            company = companies.get(i);
+                            cout << "\nLooking candidates for " << company.name << ":" << endl;
+                            findCandidates(&applicants, &company, &unprocessedJobs).printAllElements();
                     }           
                 }
             case '3':    
@@ -109,7 +115,7 @@ int main() {
                             break;
                         case '1':
                             if (!unprocessedJobs.isEmpty()) {
-                                printAllPositions(unprocessedJobs);
+                                printAllPositions(&unprocessedJobs);
                                 getche();
                             } else {
                                 cout << "\nNo positions yet\n\n";
@@ -128,7 +134,7 @@ int main() {
                             break;
                         case '6':
                             if (!processedJobs.isEmpty()) {
-                                printAllPositions(processedJobs);
+                                printAllPositions(&processedJobs);
                                 getche();
                             } else {
                                 cout << "\nNo closed positions yet\n\n";
@@ -164,14 +170,4 @@ int main() {
                 exit = false;
         }
     };
-        
-        LinkedList<Applicant> list = LinkedList<Applicant>();
-        for (auto &a : applicants) {
-            list.add(a);
-        }
-        list.printAllElements();
-        list.sort();
-        list.printAllElements();
-        list.clear();
-        list.printAllElements();
 }

@@ -128,7 +128,7 @@ LinkedList<Position> findPositions(Applicant* applicant, ArrayList<Position>* al
             result.add(a);                    
         }
     }
-
     result.sort();
     return result;
 }
+

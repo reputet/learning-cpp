@@ -12,4 +12,5 @@
 #include "./Position.h"
 #include "./Applicant.h"
 #include "./LinkedList.h"
+#include "./SearchResult.h"
 using namespace std;

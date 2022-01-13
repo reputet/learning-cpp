@@ -54,6 +54,7 @@ void printCompaniesMenu() {
     cout << "   3.   Save to file" << endl;
     cout << "   4.   Add company" << endl;
     cout << "   5.   Remove company" << endl;
+    cout << "   6.   Find all applicants for the company" << endl;
     cout << "   0.   Main menu" << endl;
     printHorizontalLine();
     cout << "Press a number: ";

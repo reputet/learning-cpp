@@ -27,10 +27,10 @@ struct Position {
     }
 };
 
-void printAllPositions(ArrayList<Position> positions) {
+void printAllPositions(ArrayList<Position> *positions) {
     int i = 1;
-    for(auto &position : positions) {
-        cout << i << ". " << position;
+    for(auto &position : *positions) {
+        cout << i << ". " << position << endl;
         i++;
     }
 }
