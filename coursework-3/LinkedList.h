@@ -162,12 +162,11 @@ public:
 
     void sort() {
         for (int i = 0; i < size; i++) {
-            cout << "i = " << i << endl;
-            for(Node<T>* n = head->next; n != tail; n = n->next) {
-                cout << "prev: " << n->prev->_data << " current: " << n->_data << " next " << n->next->_data << endl;
+            Node<T>* n = head;
+            while (n != tail) {        
+                n = n->next;
                 if (n->_data < n->prev->_data) {
-                    swap(n->prev, n);
-                    cout << "after swap prev: " << n->prev->_data << " current: " << n->_data << " next " << n->next->_data << endl;
+                    swap(n->prev, n);            
                 };
             }
         }
