@@ -77,6 +77,22 @@ ArrayList<Position> readPositions(string filename, ArrayList<Company> *companies
         }
         positionsList.add(pos);
     }
-
     return positionsList;
+}
+
+void savePositions(string filename, ArrayList<Position> *unprocessedJobs) {
+    ofstream to_file(filename);
+    string content;
+    int i = 1;
+    for(auto &position : *unprocessedJobs) {
+        content.append(position.company->name + ",");
+        content.append(to_string(position.job) + ',');
+        content.append(to_string(position.jobType) + ',');
+        content.append(to_string(position.salary) + ",");
+        content.append(to_string(position.desiredExperience));
+        content.append("\n");
+        i++;
+    }
+    content.append("\n");
+    to_file << content;
 }

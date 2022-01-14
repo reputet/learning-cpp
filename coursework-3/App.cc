@@ -137,6 +137,10 @@ int main() {
                             filename = getFilename("Please, enter the filename: ");
                             unprocessedJobs = readPositions(filename, &companies);
                             break;
+                        case '3':
+                            output_file = getInput("Enter the output file name: ");
+                            savePositions(output_file, &unprocessedJobs);
+                            break;
                         case '4':
                             unprocessedJobs.add(createPosition(&companies));
                             break;    
