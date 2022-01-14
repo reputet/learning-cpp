@@ -69,4 +69,18 @@ ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies)
     return *companies;
 }
 
-
+void saveCompanies(string filename, ArrayList<Company> *companies) {
+ofstream to_file(filename);
+    string content;
+    int i = 1;
+    for(auto &company : *companies) {
+        content.append(company.name + ",");
+        content.append(to_string(company.jobType) + ',');
+        content.append(company.address + ",");
+        content.append(company.phone);
+        content.append("\n");
+        i++;
+    }
+    content.append("\n");
+    to_file << content;
+}

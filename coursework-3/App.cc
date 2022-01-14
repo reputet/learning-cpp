@@ -96,6 +96,10 @@ int main() {
                             filename = getFilename("Please, enter the filename: ");
                             companies = readCompanies(filename, &companies);
                             break;
+                        case '3':
+                            output_file = getInput("Enter the output file name: ");
+                            saveCompanies(output_file, &companies);
+                            break;
                         case '4':
                             company = createCompany();
                             companies.add(company);
