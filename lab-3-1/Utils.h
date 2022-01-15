@@ -10,20 +10,6 @@ string getInput(string text) {
     return input;
 }
 
-ArrayList<string> splitStringAndRemove(string s, string delimeter) {
-    ArrayList<string> result = ArrayList<string>();
-    int start = 0;
-    int end = s.find_first_of(delimeter);
-    while (end != -1) {
-        result.add(s.substr(start, end - start + 1));
-        start = end + 2;
-        end = s.find_first_of(delimeter, start);
-    }
-    result.add(s.substr(start));
-    return result;
-}
-
-
 bool isFileExists(string name) {
     ifstream inFile;
     inFile.open(name);
