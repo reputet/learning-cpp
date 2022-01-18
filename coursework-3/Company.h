@@ -16,6 +16,15 @@ struct Company {
     friend bool operator< (const Company &c1, const Company &c2) {
         return (c1.name < c2.name);
     }
+
+    friend bool operator!= (const Company &c1, const Company &c2) {
+        return (c1.name != c2.name);
+    }
+    
+    Company() {}
+    Company(string _name) {
+        name = _name;
+    }
 };
 
 void printAllCompanies(ArrayList<Company> *companies) { // why array list?
