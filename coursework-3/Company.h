@@ -12,6 +12,10 @@ struct Company {
         return os << c.name << ", scope: " << toString(c.jobType) << ", address: " << c.address 
             << ", phone: " << c.phone;
     }
+    
+    friend bool operator< (const Company &c1, const Company &c2) {
+        return (c1.name < c2.name);
+    }
 };
 
 void printAllCompanies(ArrayList<Company> *companies) { // why array list?

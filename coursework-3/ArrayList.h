@@ -110,6 +110,18 @@ public:
         }
     }
 
+    void sort() {
+        for (int i = 1; i < size; i++) {
+            for (int n = 1; n <= size - i; n++) {                
+                if (array[n] < array[n - 1]) {                
+                    T temp = array[n];
+                    array[n] = array[n - 1];
+                    array[n - 1] = temp;
+                }             
+            }        
+        }
+    }
+
 private:
     unsigned int arraySize;
     unsigned int size;
