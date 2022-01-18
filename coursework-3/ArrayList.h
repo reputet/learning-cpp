@@ -10,12 +10,13 @@ public:
         size = 0;
     };
 
-    void add(T arg) {
+    int add(T arg) {
         if (size == arraySize) {
             increase();
         }
         array[size] = arg;
         size++;
+        return size - 1;
     };
 
     void add(T arg, unsigned int index) {
@@ -24,10 +25,31 @@ public:
                 add(arg);
             }
             else {
-                array[index] = arg;
+                array[index] = arg;                
             }
         }
         else {
+            throw "IndexOutOfBoundException";
+        }
+    };
+
+    void insert(T arg, unsigned int index) {
+        if (index >= 0 && index <= size) {
+            if (index == size) {
+                add(arg);
+            }
+            else {
+                // array[index] = arg;    
+                if (size == arraySize) {
+                    increase();            
+                }
+                for (int i = size - 1; i > index; i--) {
+                    array[i] = array[i - 1];
+                }
+                array[index] = arg;
+            }
+            size++;
+        } else {
             throw "IndexOutOfBoundException";
         }
     };
@@ -37,18 +59,18 @@ public:
             for (int i = index; i < size - 1; i++) {
                 array[i] = array[i + 1];
             }
+            delete &array[size - 1];
             size--;
-        }
+        } 
         else {
             throw "IndexOutOfBoundException";
         }
     };
 
-    void clear() {
-        for (int i = 0; i < size; i++) {
-            array[i] = NULL;
-        }
+    void clear() { // why not delete all empty elements?
+        delete[] array;
         size = 0;
+        arraySize = 0;
     };
 
     T get(unsigned int index) { 
@@ -84,6 +106,14 @@ public:
     }
     T  *end() {
         return &array[size];
+    }
+
+    T *getPointer(unsigned int index) {
+        if (index >= 0 && index < size) {
+            return &array[index];
+        } else {
+            throw "IndexOutOfBoundException";
+        }
     }
 
 private:

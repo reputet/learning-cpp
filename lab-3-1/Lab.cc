@@ -1,5 +1,6 @@
 #include "./ArrayList.h"
 #include "./Utils.h"
+#include <iostream>
 using namespace std;
 
 void applyChanges(ArrayList<string> *content, char searchedSymbol) {
@@ -26,7 +27,6 @@ int main() {
     char searchedSymbol = getInput("Please enter the symbol to find: ")[0];
     ArrayList<string> content = readFileToList(fileName);
     applyChanges(&content, searchedSymbol);
-    cout << "Changed content:" << endl;
     for (auto &a : content) {
         cout << a << endl;
     }

@@ -14,7 +14,7 @@ struct Company {
     }
 };
 
-void printAllCompanies(ArrayList<Company> *companies) {
+void printAllCompanies(ArrayList<Company> *companies) { // why array list?
     int i = 1;
     for(auto company : *companies) {
         cout << i << ". " <<  company << "\n";
@@ -32,23 +32,23 @@ Company createCompany() {
     return result;
 }
 
-Company* createCompany(string name, Scope scope) {
-    Company* result = new Company();
-    result->name = name;    
-    result->jobType = scope;
-    result->address = "Not present yet";
-    result->phone = "Not present yet";
+Company createCompany(string name, Scope scope) { 
+    Company result;
+    result.name = name;    
+    result.jobType = scope;
+    result.address = "Not present yet";
+    result.phone = "Not present yet";
     return result;
 }
 
-ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies) {
+ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies) { // why array list
     string line;    
     ArrayList<string> split;
 
-    ifstream infile(filename);
+    ifstream infile(filename); // check for open
 
     while (getline(infile, line)) {
-        Company com = *(new Company());
+        Company com;
         split = splitString(line, ",");
         com.name = split.get(0);
         com.jobType = static_cast<Scope>(stoi(split.get(1)));
@@ -57,7 +57,7 @@ ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies)
         bool companyExists = false;
         for(auto &c : *companies) {
             if (c.name == com.name) {
-                c = com;           
+                c = com; // recopy         
                 companyExists = true; 
             }
         }
@@ -69,17 +69,20 @@ ArrayList<Company> readCompanies(string filename, ArrayList<Company> *companies)
     return *companies;
 }
 
-void saveCompanies(string filename, ArrayList<Company> *companies) {
-ofstream to_file(filename);
-    string content;
-    int i = 1;
+void saveCompanies(string filename, ArrayList<Company> *companies) { // why array list
+ofstream to_file(filename); 
+    if (!to_file)
+    {
+        cout << "Error creating file" << endl;
+        return;
+    }
+    string content;    
     for(auto &company : *companies) {
         content.append(company.name + ",");
         content.append(to_string(company.jobType) + ',');
         content.append(company.address + ",");
         content.append(company.phone);
         content.append("\n");
-        i++;
     }
     content.append("\n");
     to_file << content;

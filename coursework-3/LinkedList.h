@@ -10,7 +10,8 @@ template <typename T> struct Node {
 
     Node(T data, Node<T>* tail) {
         _data = data;
-        prev = tail;                
+        prev = tail;
+        next = 0;
     }
 
     bool hasNext() {
@@ -37,7 +38,7 @@ public:
     }
 
     bool isEmpty() {
-        return size == 0;
+        return head == 0; 
     }
 
     Node<T>* add (T value) {
@@ -47,83 +48,90 @@ public:
         } else {
             tail->next = newElement;
         }
-        newElement->next = 0;
+        newElement->next = 0; // --
         tail = newElement;
         size++;
-        return tail;
+        return tail; // ?
     }
 
-    T get (int index) {
-        if (index > size - 1) throw "Index out of bounds";
+    Node<T>* addBefore (T value, int index) { 
+        if (index < 0 || index > size - 1) throw "Index out of bounds"; 
+        Node<T>* newElement = new Node<T>(value, 0);
+        Node<T>* i = head;
+        for (int n = 0; n < index; n++) i = i->next;
+        newElement->prev = i->prev;
+        newElement->next = i;
+        if (i == head) {
+            head = newElement;
+        } else {
+            i->prev->next=newElement;
+        }
+        i->prev = newElement;
+        size++;
+        return newElement;
+    }
+
+    Node<T>* addAfter (T value, int index) { 
+        if (index < 0 || index > size - 1) throw "Index out of bounds"; 
+        Node<T>* newElement = new Node<T>(value, 0);
+        Node<T>* i = head;
+        for (int n = 0; n < index; n++) i = i->next;
+        newElement->prev = i;
+        newElement->next = i->next;
+        if (i == tail) {
+            tail = newElement;
+        } else {
+            newElement->next->prev=newElement;
+        }
+        i->next = newElement;
+        size++;
+        return newElement;
+    }
+
+    T get (int index) { // index begins with 0 (but user sees in as 1)
+        if (index < 0 || index > size - 1) throw "Index out of bounds"; 
         Node<T>* element = head;
         for (int i = 0; i < index; i++) element = element->next;
         return element->_data;
     }
 
-    Node<T>* addBefore (T value, T searchedValue) {
-        Node<T>* newElement = new Node<T>(value, 0);
-        Node<T>* i = head;
-        while (i != 0) {
-            if (i->_data == searchedValue) {
-                newElement->prev = i->prev;
-                newElement->next = i;
-                if (i == head) {
-                    head = newElement;
-                } else {
-                i->prev->next=newElement;
-                }
-                i->prev = newElement;
-                size++;
-                return newElement;
-            }
-            i = i->next;
-        }
-        throw "Searched element not found";        
+    T edit (int index, T value) {
+        if (index < 0 || index > size - 1) throw "Index out of bounds"; 
+        Node<T>* element = head;
+        for (int i = 0; i < index; i++) element = element->next;
+        element->_data = value;
     }
 
-    Node<T>* addAfter (T value, T searchedValue) {
-        Node<T>* newElement = new Node<T>(value, 0);
-        Node<T>* i = head;
-        while (i != 0) {
-            if (i->_data == searchedValue) {
-                newElement->prev = i;
-                newElement->next = i->next;
-                if (i == tail) {
-                    tail = newElement;
-                } else {
-                i->next->prev=newElement;
-                }
-                i->next = newElement;
-                size++;
-                return newElement;
+    int getIndex (T value) {   
+        Node<T>* element = head;
+        int i = 0;
+        while (element != 0) {
+            if (element->_data == value) {
+                return i;
             }
-            i = i->next;
+            element = element->next;
+            i++;
         }
-        throw "Searched element not found";        
+        return -1;
     }
 
-    void remove (T value) {
-        Node<T>* i = head;
-        while (i != 0) {
-            cout << i->_data << " data" << endl;
-            if (i->_data == value) {
-                if (i == head) {
-                    head = i->next;
-                    head->prev = 0;
-                } else if (i == tail) {
-                    tail = i->prev;
-                    tail->next = 0;
-                } else {
-                    i->prev->next = i->next;
-                    i->next->prev = i->prev;
-                }
-                delete i;                
-                size--;
-                return;
-            }
-            i = i->next;
+    void remove (int index) { // search by index
+        if (index < 0 || index > size - 1) throw "Index out of bounds"; 
+        Node<T>* element = head;
+        for (int i = 0; i < index; i++) element = element->next;        
+        if (index == 0) {
+            head = element->next;
+            head->prev = 0;
+        } else if (index == size - 1) {
+            tail = element->prev;
+            tail->next = 0;
+        } else {
+            element->prev->next = element->next;
+            element->next->prev = element->prev;
         }
-        throw "No such element";        
+        delete element; // what if data is a pointer?
+        size--;
+        return;    
     }
 
     void clear() {
@@ -143,7 +151,7 @@ public:
         return size;
     }
     
-    void printAllElements() {
+    void printAllElements() { // index begins from 1
         int k = 1;
         Node<T>* i = head;
         if (size != 0) {
@@ -154,8 +162,15 @@ public:
             }
             cout << "\b\b";
         }
+        else{
+            cout << "Empty list" << endl;
+        }
         cout << endl;
     }
+
+// find by value (if operator == is in T)
+
+
     void swap (Node<T>* first, Node<T>* second) {
         T temp = first->_data;
         first->_data = second->_data;
@@ -166,7 +181,7 @@ public:
         for (int i = 0; i < size; i++) {
             Node<T>* n = head->next;
             while (n != 0) {        
-                if (n->_data < n->prev->_data) {
+                if (n->_data < n->prev->_data) { // if operator < is in T
                     swap(n->prev, n);            
                     
                 };

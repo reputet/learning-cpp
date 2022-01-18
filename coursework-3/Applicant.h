@@ -29,18 +29,17 @@ struct Applicant {
 
     bool isMatch(Position p) {
         for(auto &job : possibleJobs) {
-            if (job == p.job) {
-                if (p.jobType == jobType &&
+            if (job == p.job &&
+                p.jobType == jobType &&
                 p.salary >= desiredSalary &&
-                p.desiredExperience <= experience) return true;
-            }
+                p.desiredExperience <= experience) return true;    
         };
     return false;
     }
     
 };
 
-void printAllAplicants(ArrayList<Applicant> applicants) {
+void printAllAplicants(ArrayList<Applicant> applicants) { // why array list?
     int i = 1;
     for(auto &applicant : applicants) {
         cout << i << ". " << applicant << endl;
@@ -78,7 +77,7 @@ ArrayList<Applicant> readApplicants(string filename) {
     ArrayList<string> split;
     ArrayList<string> splittedNumbers;
 
-    ifstream infile(filename);
+    ifstream infile(filename); // check for open
     
     while (getline(infile, line)) {
         Applicant applicant = Applicant();
@@ -100,9 +99,14 @@ ArrayList<Applicant> readApplicants(string filename) {
 }
 
 void saveApplicants(string filename, ArrayList<Applicant> applicants) {
-    ofstream to_file(filename);
+    ofstream to_file(filename); 
+    if (!to_file)
+    {
+        cout << "Error creating file" << endl;
+        return;
+    }
+
     string content;
-    int i = 1;
     for(auto &applicant : applicants) {
         content.append(applicant.fullName + ",");
         content.append(to_string(applicant.jobType) + ',');
@@ -115,7 +119,6 @@ void saveApplicants(string filename, ArrayList<Applicant> applicants) {
         content.append(to_string(applicant.experience) + ",");
         content.append(to_string(applicant.desiredSalary));
         content.append("\n");
-        i++;
     }
     content.append("\n");
     to_file << content;

@@ -22,7 +22,7 @@ struct SearchResult {
 };
 
 LinkedList<SearchResult> findCandidates(ArrayList<Applicant> *applicants, Company *c, 
-    ArrayList<Position> *allJobs) {
+    ArrayList<Position> *allJobs) { // why array list?
     LinkedList<SearchResult> result = LinkedList<SearchResult>();
     LinkedList<Position> jobs = LinkedList<Position>();
     for(auto &a : *allJobs) {                

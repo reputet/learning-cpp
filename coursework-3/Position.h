@@ -21,13 +21,13 @@ struct Position {
     }
 
     friend ostream& operator<< (ostream& os, const Position &c) {
-        return os << "Scope: " << toString(c.company->jobType) << ", position: " << toString(c.job) 
+        return os << "Scope: " << toString(c.company->jobType) << ", job: " << toString(c.job) 
             << ", company: " << c.company->name << ", desired experience: " << c.desiredExperience 
             << ", salary: " << c.salary;
     }
 };
 
-void printAllPositions(ArrayList<Position> *positions) {
+void printAllPositions(ArrayList<Position> *positions) { // why array list?
     int i = 1;
     for(auto &position : *positions) {
         cout << i << ". " << position << endl;
@@ -35,29 +35,29 @@ void printAllPositions(ArrayList<Position> *positions) {
     }
 }
 
-Position createPosition(ArrayList<Company> *companies) {
+Position createPosition(ArrayList<Company> *companies) { // why array list?
     Position p;
     printAllScopes();
     p.jobType = static_cast<Scope>(stoi(getInput("Please select scope:\n")) - 1);
     printAllJobNames();
     p.job = static_cast<Job>(stoi(getInput("Please enter job:\n")) - 1);
     printAllCompanies(companies);
-    Company c = companies->get(stoi(getInput("Please choose the company:\n")) - 1);
-    p.company = &c;
+    p.company = companies->getPointer(stoi(getInput("Please choose the company:\n")) - 1);
+     
     p.salary = stoi(getInput("Please enter the salary:\n"));
     p.desiredExperience = stoi(getInput("Please enter desired experience in years:\n"));
     return p;
 }
 
-ArrayList<Position> readPositions(string filename, ArrayList<Company> *companies) {
+ArrayList<Position> readPositions(string filename, ArrayList<Company> *companies) { // why array list?
     string line;
     ArrayList<Position> positionsList;
     ArrayList<string> split;
 
-    ifstream infile(filename);
+    ifstream infile(filename); 
     
     while (getline(infile, line)) {
-        Position pos = *(new Position());
+        Position pos;
         split = splitString(line, ",");
         pos.job = static_cast<Job>(stoi(split.get(1)));
         pos.jobType = static_cast<Scope>(stoi(split.get(2)));
@@ -71,27 +71,30 @@ ArrayList<Position> readPositions(string filename, ArrayList<Company> *companies
         }
         if (pos.company == 0) {
             cout << "Creating company " << split.get(0) << endl;
-            Company* com = createCompany(split.get(0), pos.jobType);
-            pos.company = com;        
-            companies->add(*com);
+            int index = companies->add(createCompany(split.get(0), pos.jobType));
+            pos.company = companies->getPointer(index);
         }
         positionsList.add(pos);
     }
     return positionsList;
 }
 
-void savePositions(string filename, ArrayList<Position> *unprocessedJobs) {
-    ofstream to_file(filename);
+void savePositions(string filename, ArrayList<Position> *unprocessedJobs) { // why array list
+    ofstream to_file(filename); 
+    if (!to_file)
+    {
+        cout << "Error creating file" << endl;
+        return;
+    }
+
     string content;
-    int i = 1;
     for(auto &position : *unprocessedJobs) {
         content.append(position.company->name + ",");
         content.append(to_string(position.job) + ',');
         content.append(to_string(position.jobType) + ',');
         content.append(to_string(position.salary) + ",");
         content.append(to_string(position.desiredExperience));
-        content.append("\n");
-        i++;
+        content.append("\n");        
     }
     content.append("\n");
     to_file << content;

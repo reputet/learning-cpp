@@ -48,7 +48,7 @@ int main() {
                             applicants = readApplicants(filename);
                             break;
                         case '3':
-                            output_file = getInput("Enter the output file name: ");
+                            output_file = getInput("Enter the output file name: "); // check for open
                             saveApplicants(output_file, applicants);
                             break;
                         case '4':
@@ -97,7 +97,7 @@ int main() {
                             companies = readCompanies(filename, &companies);
                             break;
                         case '3':
-                            output_file = getInput("Enter the output file name: ");
+                            output_file = getInput("Enter the output file name: "); // check for open
                             saveCompanies(output_file, &companies);
                             break;
                         case '4':
@@ -138,7 +138,7 @@ int main() {
                             unprocessedJobs = readPositions(filename, &companies);
                             break;
                         case '3':
-                            output_file = getInput("Enter the output file name: ");
+                            output_file = getInput("Enter the output file name: "); // check for open
                             savePositions(output_file, &unprocessedJobs);
                             break;
                         case '4':
@@ -186,4 +186,14 @@ int main() {
                 exit = false;
         }
     };
+    ArrayList<string> a;
+    a.add("wer");
+    a.add("were");
+    a.add("werew");
+    a.add("werewo");
+    a.insert("i", 2);
+    cout << a.getSize() << endl;
+    for (auto &ai : a) {
+        cout << ai << endl;
+    }
 }

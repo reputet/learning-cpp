@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 using namespace std;
 
 template <typename T> struct ArrayList {
@@ -11,12 +10,13 @@ public:
         size = 0;
     };
 
-    void add(T arg) {
+    int add(T arg) {
         if (size == arraySize) {
             increase();
         }
         array[size] = arg;
         size++;
+        return size - 1;
     };
 
     void add(T arg, unsigned int index) {
@@ -25,7 +25,7 @@ public:
                 add(arg);
             }
             else {
-                array[index] = arg;
+                array[index] = arg;                
             }
         }
         else {
@@ -38,18 +38,18 @@ public:
             for (int i = index; i < size - 1; i++) {
                 array[i] = array[i + 1];
             }
+            delete &array[size - 1];
             size--;
-        }
+        } 
         else {
             throw "IndexOutOfBoundException";
         }
     };
 
-    void clear() {
-        for (int i = 0; i < size; i++) {
-            array[i] = 0;
-        }
+    void clear() { // why not delete all empty elements?
+        delete[] array;
         size = 0;
+        arraySize = 0;
     };
 
     T get(unsigned int index) { 
@@ -93,7 +93,7 @@ private:
     T* array;
 
     void increase() { 
-        if (arraySize + 16 <= LONG_MAX) {
+        if (arraySize + 16 <= 2147483647) {
             T* newArray = new T[arraySize + 16];
             for (unsigned int i = 0; i < arraySize; i++) {
                 newArray[i] = array[i];
