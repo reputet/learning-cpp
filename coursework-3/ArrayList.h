@@ -19,14 +19,9 @@ public:
         return size - 1;
     };
 
-    void add(T arg, unsigned int index) {
-        if (index >= 0 && index <= size) {
-            if (index == size) {
-                add(arg);
-            }
-            else {
-                array[index] = arg;                
-            }
+    void replace(T arg, unsigned int index) {
+        if (index >= 0 && index < size) {            
+            array[index] = arg;                
         }
         else {
             throw "IndexOutOfBoundException";
@@ -38,12 +33,11 @@ public:
             if (index == size) {
                 add(arg);
             }
-            else {
-                // array[index] = arg;    
+            else { 
                 if (size == arraySize) {
                     increase();            
                 }
-                for (int i = size - 1; i > index; i--) {
+                for (int i = size; i > index; i--) {
                     array[i] = array[i - 1];
                 }
                 array[index] = arg;

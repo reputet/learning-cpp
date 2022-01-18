@@ -8,9 +8,9 @@ int main() {
     ArrayList<Applicant> hired = ArrayList<Applicant>();
     ArrayList<Company> companies = ArrayList<Company>();
     
-    // applicants = readApplicants("applicants.csv");
-    // companies = readCompanies("companies.csv", &companies);
-    // unprocessedJobs = readPositions("positions.csv", &companies);
+    applicants = readApplicants("applicants.csv");
+    companies = readCompanies("companies.csv", &companies);
+    unprocessedJobs = readPositions("positions.csv", &companies);
 
     bool exit = false;
     string filename;
@@ -60,13 +60,18 @@ int main() {
                             applicants.remove(i - 1);
                             break;
                         case '6':
+                            i = stoi(getInput("Please enter the number of the candidate to edit:\n"));
+                            cout << applicants.get(i - 1) << endl;
+                            applicants.replace(createApplicant(), i - 1);
+                            break;
+                        case '7':
                             printAllAplicants(applicants);
                             i = stoi(getInput("Enter the candidate number: ")) - 1;
                             applicant = applicants.get(i);
                             cout << "\nNext positions are found for " << applicant.fullName << ":" << endl;
                             findPositions(&applicant, &unprocessedJobs).printAllElements();
                             break;
-                        case '7':
+                        case '8':
                             if (!hired.isEmpty()) {
                                 printAllAplicants(hired);
                                 getche();
@@ -109,6 +114,11 @@ int main() {
                             companies.remove(i - 1);
                             break;
                         case '6':
+                            i = stoi(getInput("Please enter the number of the company to edit:\n"));
+                            cout << companies.get(i - 1) << endl;
+                            companies.replace(createCompany(), i - 1);
+                            break;
+                        case '7':
                             printAllCompanies(&companies);
                             int i = stoi(getInput("Enter the company number: ")) - 1;
                             company = companies.get(i);
@@ -149,6 +159,11 @@ int main() {
                             unprocessedJobs.remove(i - 1);
                             break;
                         case '6':
+                            i = stoi(getInput("Please enter the number of the position to edit:\n"));
+                            cout << unprocessedJobs.get(i - 1) << endl;
+                            unprocessedJobs.replace(createPosition(&companies), i - 1);
+                            break;                            
+                        case '7':
                             if (!processedJobs.isEmpty()) {
                                 printAllPositions(&processedJobs);
                                 getche();
@@ -186,14 +201,4 @@ int main() {
                 exit = false;
         }
     };
-    ArrayList<string> a;
-    a.add("wer");
-    a.add("were");
-    a.add("werew");
-    a.add("werewo");
-    a.insert("i", 2);
-    cout << a.getSize() << endl;
-    for (auto &ai : a) {
-        cout << ai << endl;
-    }
 }

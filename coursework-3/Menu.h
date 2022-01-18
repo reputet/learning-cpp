@@ -26,8 +26,9 @@ void printApplicantsMenu() {
     cout << "   3.   Save to file" << endl;
     cout << "   4.   Add candidate" << endl;
     cout << "   5.   Remove candidate" << endl;
-    cout << "   6.   Find all positions for the candidate" << endl;
-    cout << "   7.   See successfully employed candidates" << endl;
+    cout << "   6.   Edit candidate" << endl;
+    cout << "   7.   Find all positions for the candidate" << endl;
+    cout << "   8.   See successfully employed candidates" << endl;
     cout << "   0.   Main menu" << endl;
     printHorizontalLine();
     cout << "Press a number: ";
@@ -41,7 +42,8 @@ void printPositionsMenu() {
     cout << "   3.   Save to file" << endl;
     cout << "   4.   Add position" << endl;
     cout << "   5.   Remove position" << endl;
-    cout << "   6.   See successfully closed positions" << endl;
+    cout << "   6.   Edit position" << endl;
+    cout << "   7.   See successfully closed positions" << endl;
     cout << "   0.   Main menu" << endl;
     printHorizontalLine();
     cout << "Press a number: ";
@@ -55,7 +57,8 @@ void printCompaniesMenu() {
     cout << "   3.   Save to file" << endl;
     cout << "   4.   Add company" << endl;
     cout << "   5.   Remove company" << endl;
-    cout << "   6.   Find all applicants for the company" << endl;
+    cout << "   6.   Edit company" << endl;
+    cout << "   7.   Find all applicants for the company" << endl;
     cout << "   0.   Main menu" << endl;
     printHorizontalLine();
     cout << "Press a number: ";
