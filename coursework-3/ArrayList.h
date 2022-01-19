@@ -50,10 +50,9 @@ public:
 
     void remove(unsigned int index) {
         if (index >= 0 && index < size) {
-            for (int i = index; i < size - 1; i++) {
-                array[i] = array[i + 1];
+            for (int i = index; i < size - 1; i++) {                
+                array[i] = array[i + 1];                            
             }
-            delete &array[size - 1];
             size--;
         } 
         else {
@@ -61,8 +60,7 @@ public:
         }
     };
 
-    void clear() { // why not delete all empty elements?
-        delete[] array;
+    void clear() { 
         size = 0;
         arraySize = 0;
     };
@@ -133,7 +131,6 @@ private:
             for (unsigned int i = 0; i < arraySize; i++) {
                 newArray[i] = array[i];
             }
-            delete[] array;
             array = newArray;
             arraySize += 16;
         }
