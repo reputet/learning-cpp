@@ -1,0 +1,6 @@
+*.exe
+*.vscode*
+*.zip
+*.gz
+*.pdf
+report.*
